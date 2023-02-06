@@ -1,10 +1,14 @@
 import { Link } from 'react-router-dom'
 import React from 'react'
 
-function Drawer({ handleOnClick, routes, protectedRoutes }) {
+function Drawer({ handleOnClick, isOpen, routes, protectedRoutes }) {
     return (
-        <div className="fixed top-0 left-0 flex w-full">
-            <nav className="fixed top-0 left-0 z-40 min-h-screen w-full max-w-xs flex-col justify-between bg-white shadow-md">
+        <>
+            <nav
+                className={`fixed top-0 left-0 z-40 min-h-screen duration-300 max-w-xs flex-col justify-between bg-white shadow-md overflow-hidden ${
+                    isOpen ? 'w-full' : 'w-0'
+                }`}
+            >
                 <div className="flex w-full flex-col">
                     <div className="flex w-full justify-end p-2">
                         <svg
@@ -40,10 +44,12 @@ function Drawer({ handleOnClick, routes, protectedRoutes }) {
                 <div className=""></div>
             </nav>
             <div
-                className="fixed right-0 top-0 min-h-screen w-full backdrop-blur-sm backdrop-brightness-50 backdrop-filter"
+                className={`fixed left-0 top-0 duration-150 min-h-screen backdrop-blur-sm backdrop-brightness-70 backdrop-filter ${
+                    isOpen ? 'w-full' : 'w-0'
+                }`}
                 onClick={handleOnClick}
             ></div>
-        </div>
+        </>
     )
 }
 

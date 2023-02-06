@@ -22,6 +22,7 @@ function Nav() {
     const toggleDrawer = () => {
         setIsOpen(!isOpen)
     }
+
     return (
         <>
             <nav className="flex justify-center shadow-md bg-white p-4">
@@ -61,13 +62,12 @@ function Nav() {
                         />
                     </svg>
                 </div>
-                {isOpen ? (
-                    <Drawer
-                        routes={routes}
-                        protectedRoutes={protectedRoutes}
-                        handleOnClick={toggleDrawer}
-                    />
-                ) : null}
+                <Drawer
+                    routes={routes}
+                    protectedRoutes={protectedRoutes}
+                    handleOnClick={toggleDrawer}
+                    isOpen={isOpen}
+                />
             </nav>
         </>
     )
