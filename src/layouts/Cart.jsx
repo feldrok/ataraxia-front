@@ -1,89 +1,54 @@
-import { Link } from 'react-router-dom'
+import CartItem from './CartItem'
 import React from 'react'
 
-function Cart({ handleOnClick }) {
+function Cart({ handleOnClick, isOpen }) {
     return (
-        <div
-            class="relative z-10"
-            aria-labelledby="slide-over-title"
-            role="dialog"
-            aria-modal="true"
-        >
-            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
-
-            <div class="fixed inset-0 overflow-hidden">
-                <div class="absolute inset-0 overflow-hidden">
-                    <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
-                        <div class="pointer-events-auto w-screen max-w-md">
-                            <div class="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
-                                <div class="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
-                                    <div class="flex items-start justify-between">
-                                        <h2
-                                            class="text-lg font-medium text-gray-900"
-                                            id="slide-over-title"
-                                        >
-                                            Carrito cervecero
-                                        </h2>
-                                        <div class="ml-3 flex h-7 items-center">
-                                            <button
-                                                type="button"
-                                                class="-m-2 p-2 text-gray-400 hover:text-gray-500"
-                                            >
-                                                <span class="sr-only">
-                                                    Close panel
-                                                </span>
-                                                <svg
-                                                    onClick={handleOnClick}
-                                                    class="h-6 w-6"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke-width="1.5"
-                                                    stroke="currentColor"
-                                                    aria-hidden="true"
-                                                >
-                                                    <path
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        d="M6 18L18 6M6 6l12 12"
-                                                    />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="border-t border-gray-200 py-6 px-4 sm:px-6">
-                                    <div class="mt-6">
-                                        <a
-                                            href="#"
-                                            class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-                                        >
-                                            Checkout
-                                        </a>
-                                    </div>
-                                    <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
-                                        <p>
-                                            <button
-                                                type="button"
-                                                class="font-medium text-indigo-600 hover:text-indigo-500"
-												onClick={handleOnClick}
-                                            >
-                                                Continue Shopping
-                                                <span aria-hidden="true">
-                                                    {' '}
-                                                    &rarr;
-                                                </span>
-                                            </button>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+        <>
+            <nav
+                className={`fixed top-0 right-0 z-30 min-h-screen duration-300 max-w-xs bg-white shadow-md overflow-hidden ${
+                    isOpen ? 'w-full' : 'w-0'
+                }`}
+            >
+                <div className="flex flex-col justify-between w-full h-screen">
+                    <div className="flex w-full flex-col">
+                        <div className="flex w-full justify-start p-2">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth={2}
+                                className="h-8 w-8 cursor-pointer stroke-primary-500"
+                                onClick={handleOnClick}
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M6 18L18 6M6 6l12 12"
+                                />
+                            </svg>
+                        </div>
+                        <div className="w-full flex justify-center p-2">
+                            <CartItem />
                         </div>
                     </div>
+                    <div className="w-full flex flex-col justify-center p-4">
+                        <div className="flex justify-between p-2">
+                            <h2 className="font-bold">Total</h2>
+                            <p className="font-light">$0 ARS</p>
+                        </div>
+                        <button className="hover:bg-primary-500 p-4 hover:text-white font-bold uppercase rounded-sm bg-white text-primary-500 border-2 border-primary-500 duration-300">
+                            Proceder al pago
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </nav>
+            <div
+                className={`fixed z-20 right-0 top-0 duration-150 min-h-screen backdrop-blur-sm backdrop-brightness-70 backdrop-filter ${
+                    isOpen ? 'w-full' : 'w-0'
+                }`}
+                onClick={handleOnClick}
+            ></div>
+        </>
     )
 }
 export default Cart
