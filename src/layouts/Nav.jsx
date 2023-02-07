@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 
+import Cart from './Cart'
 import Drawer from './Drawer'
 import { Link } from 'react-router-dom'
 
@@ -19,9 +20,12 @@ const protectedRoutes = [
 
 function Nav() {
     const [isOpen, setIsOpen] = useState(false)
-
+    const [isCartOpen, setIsCartOpen] = useState(false)
     const toggleDrawer = () => {
         setIsOpen(!isOpen)
+    }
+    const toggleCartOpen = () => {
+        setIsCartOpen(!isCartOpen)
     }
 
     return (
@@ -55,6 +59,7 @@ function Nav() {
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
                         className="w-8 h-8 stroke-primary-500 cursor-pointer"
+                        onClick={toggleCartOpen}
                     >
                         <path
                             strokeLinecap="round"
@@ -69,6 +74,7 @@ function Nav() {
                     handleOnClick={toggleDrawer}
                     isOpen={isOpen}
                 />
+                <Cart handleOnClick={toggleCartOpen} isOpen={isCartOpen} />
             </nav>
         </>
     )
