@@ -1,12 +1,12 @@
-import { createReducer } from "@reduxjs/toolkit"
-import productActions from "./actions"
+import { createReducer } from '@reduxjs/toolkit'
+import productActions from './actions'
 
 const { getProducts, getProductById } = productActions
 
 const initialState = {
-  products: [],
-  product: {},
-  message: null,
+    products: [],
+    product: {},
+    message: null,
 }
 
 const productReducer = createReducer(initialState, (builder) => {

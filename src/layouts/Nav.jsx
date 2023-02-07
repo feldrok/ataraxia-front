@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import Drawer from './Drawer'
+import { Link } from 'react-router-dom'
 
 const routes = [
     {
@@ -22,9 +23,10 @@ function Nav() {
     const toggleDrawer = () => {
         setIsOpen(!isOpen)
     }
+
     return (
         <>
-            <nav className="flex justify-center shadow-md bg-white p-4">
+            <nav className="fixed z-50 w-full flex justify-center shadow-md bg-white p-4">
                 <div>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -41,10 +43,10 @@ function Nav() {
                         />
                     </svg>
                 </div>
-                <div className="flex w-full justify-center">
-                    <h1 className="text-xl font-bold text-primary-500">
-                        Ataraxia
-                    </h1>
+                <div className="flex w-full justify-center select-none">
+                    <Link to="/">
+                        <img src="/ATARAXIA2.png" alt="logo" className="w-36" />
+                    </Link>
                 </div>
                 <div>
                     <svg
@@ -61,13 +63,12 @@ function Nav() {
                         />
                     </svg>
                 </div>
-                {isOpen ? (
-                    <Drawer
-                        routes={routes}
-                        protectedRoutes={protectedRoutes}
-                        handleOnClick={toggleDrawer}
-                    />
-                ) : null}
+                <Drawer
+                    routes={routes}
+                    protectedRoutes={protectedRoutes}
+                    handleOnClick={toggleDrawer}
+                    isOpen={isOpen}
+                />
             </nav>
         </>
     )
