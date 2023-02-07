@@ -5,7 +5,7 @@ function Drawer({ handleOnClick, isOpen, routes, protectedRoutes }) {
     return (
         <>
             <nav
-                className={`fixed top-0 left-0 z-40 min-h-screen duration-300 max-w-xs flex-col justify-between bg-white shadow-md overflow-hidden ${
+                className={`fixed top-0 left-0 z-30 min-h-screen duration-300 max-w-xs flex-col justify-between bg-white shadow-md overflow-hidden ${
                     isOpen ? 'w-full' : 'w-0'
                 }`}
             >
@@ -44,7 +44,7 @@ function Drawer({ handleOnClick, isOpen, routes, protectedRoutes }) {
                 <div className=""></div>
             </nav>
             <div
-                className={`fixed left-0 top-0 duration-150 min-h-screen backdrop-blur-sm backdrop-brightness-70 backdrop-filter ${
+                className={`fixed z-20 left-0 top-0 duration-150 min-h-screen backdrop-blur-sm backdrop-brightness-70 backdrop-filter ${
                     isOpen ? 'w-full' : 'w-0'
                 }`}
                 onClick={handleOnClick}

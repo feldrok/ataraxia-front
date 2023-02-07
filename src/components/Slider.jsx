@@ -2,13 +2,13 @@ import React, { useEffect, useRef, useState } from 'react'
 
 const images = [
     {
-        image: 'https://images.pexels.com/photos/6173987/pexels-photo-6173987.jpeg',
+        image: '/banner1.jpg',
     },
     {
-        image: 'https://images.pexels.com/photos/5531894/pexels-photo-5531894.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        image: '/banner2.jpg',
     },
     {
-        image: 'https://images.pexels.com/photos/159291/beer-machine-alcohol-brewery-159291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        image: '/banner3.jpg',
     },
 ]
 
@@ -45,12 +45,12 @@ function Slider() {
     }
 
     return (
-        <div className="w-full select-none relative max-w-7xl justify-center flex overflow-hidden">
+        <div className="w-full select-none relative z-10 max-w-7xl justify-center flex overflow-hidden">
             <div
                 style={{
                     transform: `translate3d(${-currentIndex * 100}%, 0, 0)`,
                 }}
-                className={`aspect-w-16 whitespace-nowrap aspect-h-9 w-full duration-300`}
+                className={`aspect-w-16 z-10 whitespace-nowrap aspect-h-9 w-full duration-300`}
             >
                 {images.map((image) => (
                     <img
@@ -60,9 +60,9 @@ function Slider() {
                     />
                 ))}
             </div>
-            <div className="absolute w-full top-1/2 transform -translate-y-1/2 px-3 flex justify-between items-center">
+            <div className="absolute z-10 w-full top-1/2 transform -translate-y-1/2 px-3 flex justify-between items-center">
                 <button
-                    className="hover:bg-black rounded-full p-2 duration-300"
+                    className="hover:bg-primary-500 rounded-full p-2 duration-300"
                     onClick={handlePrev}
                 >
                     <svg
@@ -80,7 +80,7 @@ function Slider() {
                     </svg>
                 </button>
                 <button
-                    className="hover:bg-black rounded-full p-2 duration-300"
+                    className="hover:bg-primary-500 rounded-full p-2 duration-300"
                     onClick={handleNext}
                 >
                     <svg
