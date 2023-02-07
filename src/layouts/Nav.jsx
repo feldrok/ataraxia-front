@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import Cart from './Cart'
 import Drawer from './Drawer'
 import { Link } from 'react-router-dom'
-import Cart from './Cart'
 
 const routes = [
     {
