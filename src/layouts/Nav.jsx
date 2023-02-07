@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import Drawer from './Drawer'
+import Cart from './Cart'
 
 const routes = [
     {
@@ -18,9 +19,12 @@ const protectedRoutes = [
 
 function Nav() {
     const [isOpen, setIsOpen] = useState(false)
-
+    const [openCart, setOpenCart] = useState(false)
     const toggleDrawer = () => {
         setIsOpen(!isOpen)
+    }
+    const toggleCartOpen = () => {
+        setOpenCart(!openCart)
     }
     return (
         <>
@@ -53,6 +57,7 @@ function Nav() {
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
                         className="w-8 h-8 stroke-primary-500 cursor-pointer"
+                        onClick={toggleCartOpen}
                     >
                         <path
                             strokeLinecap="round"
@@ -68,6 +73,7 @@ function Nav() {
                         handleOnClick={toggleDrawer}
                     />
                 ) : null}
+                {openCart ? <Cart handleOnClick={toggleCartOpen} /> : null}
             </nav>
         </>
     )
