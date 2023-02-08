@@ -16,7 +16,7 @@ function CartItem() {
     }
 
     return (
-        <div className="flex w-full p-1 gap-2">
+        <div className="flex w-full p-1 gap-2 justify-center">
             <div className="flex">
                 <img
                     className="w-32 h-32 object-cover rounded-md shadow-md"
