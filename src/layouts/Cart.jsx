@@ -1,4 +1,5 @@
 import CartItem from '../components/CartItem'
+import { Link } from 'react-router-dom'
 import React from 'react'
 
 function Cart({ handleOnClick, isOpen }) {
@@ -36,9 +37,12 @@ function Cart({ handleOnClick, isOpen }) {
                             <h2 className="font-bold">Total</h2>
                             <p className="font-light">$0 ARS</p>
                         </div>
-                        <button className="hover:bg-primary-500 p-4 hover:text-white font-bold uppercase rounded-sm bg-white text-primary-500 border-2 border-primary-500 duration-300">
+                        <Link
+                            to={'/checkout'}
+                            className="hover:bg-primary-500 p-4 hover:text-white text-center font-bold uppercase rounded-sm bg-white text-primary-500 border-2 border-primary-500 duration-300"
+                        >
                             Proceder al pago
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </nav>
