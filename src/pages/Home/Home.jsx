@@ -38,6 +38,7 @@ function Home() {
                             {filteredProducts(category._id)?.map((product) => (
                                 <ProductCard
                                     key={product._id}
+                                    id={product._id}
                                     name={product.name}
                                     price={product.price}
                                     image={product.image}
