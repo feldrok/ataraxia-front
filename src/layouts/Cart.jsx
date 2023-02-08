@@ -1,4 +1,4 @@
-import CartItem from './CartItem'
+import CartItem from '../components/CartItem'
 import React from 'react'
 
 function Cart({ handleOnClick, isOpen }) {
