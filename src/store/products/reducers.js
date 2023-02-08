@@ -1,4 +1,4 @@
-import { createReducer } from '@reduxjs/toolkit'
+/* import { createReducer } from '@reduxjs/toolkit'
 import productActions from './actions'
 
 const { getProducts, getProductById } = productActions
@@ -30,3 +30,4 @@ const productReducer = createReducer(initialState, (builder) => {
 })
 
 export default productReducer
+ */
