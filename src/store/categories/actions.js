@@ -1,4 +1,4 @@
-/* import axios from 'axios'
+import axios from 'axios'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
 const API_URL = process.env.REACT_APP_API_URL
@@ -22,4 +22,4 @@ const categoryActions = {
     getCategories
 }
 
-export default categoryActions */
+export default categoryActions

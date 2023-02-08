@@ -1,4 +1,4 @@
-/* import categoryActions from './actions'
+import categoryActions from './actions'
 import { createReducer } from '@reduxjs/toolkit'
 
 const { getCategories } = categoryActions
@@ -19,4 +19,4 @@ const categoryReducer = createReducer(initialState, (builder) => {
         })
 })
 
-export default categoryReducer */
+export default categoryReducer

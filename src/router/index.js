@@ -1,9 +1,10 @@
+import Checkout from '../pages/Checkout/Checkout'
 import Home from '../pages/Home/Home'
 import Layout from '../layouts/Layout'
-import Signin from "./Signin/Signin"
-import Signinform from "./../components/Signinform/Signinform"
-import Signup from './Signup/Signup'
-import Signupform from "./../components/Signupform/Signupform"
+import Signin from "../pages/Signin/Signin"
+import Signinform from "../components/Signinform"
+import Signup from '../pages/Signup/Signup'
+import Signupform from "../components/Signupform"
 import { createBrowserRouter } from 'react-router-dom'
 
 const indexRouter = createBrowserRouter([
@@ -16,6 +17,10 @@ const indexRouter = createBrowserRouter([
                 element: <Home />,
             }
         ]
+    },
+    {
+        path: '/checkout',
+        element: <Checkout />
     },
     {
         path: "/signup",
