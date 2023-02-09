@@ -3,6 +3,9 @@ module.exports = {
     content: ['./src/**/*.{js,jsx,ts,tsx}'],
     theme: {
         extend: {
+            backgroundImage: {
+                'signup-banner': "url('/public/ataraxia-signupbanner.png')",
+            },
             colors: {
                 primary: {
                     100: '#FF99B6',

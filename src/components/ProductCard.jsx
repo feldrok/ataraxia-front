@@ -1,6 +1,8 @@
+import { Link } from 'react-router-dom'
 import React from 'react'
 
 function ProductCard({
+    id,
     name,
     image,
     price,
@@ -54,9 +56,12 @@ function ProductCard({
             return (
                 <>
                     <div className="p-2">
-                        <h1 className={`text-2xl font-bold ${textColor}`}>
+                        <Link
+                            to={`/product/${id}`}
+                            className={`text-2xl font-bold ${textColor}`}
+                        >
                             {name}
-                        </h1>
+                        </Link>
                         <div className="flex justify-between">
                             <p className="text-gray-500">IBU {ibu}</p>
                             <p className="text-gray-500">
@@ -125,9 +130,12 @@ function ProductCard({
             return (
                 <>
                     <div className="p-2">
-                        <h1 className={`text-2xl font-bold text-gray-700`}>
+                        <Link
+                            to={`/product/${id}`}
+                            className={`text-2xl font-bold text-gray-700`}
+                        >
                             {name}
-                        </h1>
+                        </Link>
                         <div className="flex justify-between text-gray-500">
                             <p>{packSize} unidades</p>
                             <p>{ml}ml c/botella</p>
@@ -194,9 +202,12 @@ function ProductCard({
             return (
                 <>
                     <div className="p-2">
-                        <h1 className={`text-2xl font-bold text-gray-700`}>
+                        <Link
+                            to={`/product/${id}`}
+                            className={`text-2xl font-bold text-gray-700`}
+                        >
                             {name}
-                        </h1>
+                        </Link>
                         <p className="text-gray-600 font-medium text-xl">
                             ${price}
                         </p>
@@ -265,7 +276,9 @@ function ProductCard({
     return (
         <div className="flex flex-col w-64 shadow-md hover:scale-105 hover:shadow-none duration-300 rounded-sm select-none">
             <div className="rounded-sm">
-                <img src={image} alt="" />
+                <Link to={`/product/${id}`}>
+                    <img src={image} alt="" />
+                </Link>
             </div>
             {renderDetails(category)}
         </div>
