@@ -20,7 +20,7 @@ function CartItem() {
             <div className="flex">
                 <img
                     className="w-32 h-32 object-cover rounded-md shadow-md"
-                    src="https://firebasestorage.googleapis.com/v0/b/ataraxiapp-50a47.appspot.com/o/blondeale.png?alt=media&token=190942bf-7eeb-46f9-b2a4-9dab8e0de0c4"
+                    src="https://firebasestorage.googleapis.com/v0/b/ataraxiapp-7a9cb.appspot.com/o/blondeale.jpg?alt=media&token=f681943f-e618-4ac4-b4e7-3b0e00c6baeb"
                     alt=""
                 />
             </div>
