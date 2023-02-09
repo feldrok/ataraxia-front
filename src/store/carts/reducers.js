@@ -1,0 +1,43 @@
+import cartActions from './actions'
+import { createReducer } from '@reduxjs/toolkit'
+
+const { createCart, getCart, updateCart, emptyCart } = cartActions
+
+const initialState = {
+    cart: [],
+    message: null,
+}
+
+const cartReducer = createReducer(initialState, (builder) => {
+    builder
+        .addCase(createCart.fulfilled, (state, action) => {
+            let newState = {
+                cart: action.payload,
+                message: action.payload.message,
+            }
+            return newState
+        })
+        .addCase(getCart.fulfilled, (state, action) => {
+            let newState = {
+                cart: action.payload,
+                message: action.payload.message,
+            }
+            return newState
+        })
+        .addCase(updateCart.fulfilled, (state, action) => {
+            let newState = {
+                cart: action.payload,
+                message: action.payload.message,
+            }
+            return newState
+        })
+        .addCase(emptyCart.fulfilled, (state, action) => {
+            let newState = {
+                cart: action.payload,
+                message: action.payload.message,
+            }
+            return newState
+        })
+})
+
+export default cartReducer
