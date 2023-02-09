@@ -1,7 +1,14 @@
 import React, { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 
-export default function BuyCard({ price, stock, name }) {
+export default function BuyCard({
+    price,
+    stock,
+    name,
+    textColor,
+    bgColor,
+    bgHoverColor,
+}) {
     const product = {
         name: name,
         price: price,
@@ -21,7 +28,7 @@ export default function BuyCard({ price, stock, name }) {
         <>
             <div className="flex justify-center mt-2">
                 <button
-                    className="bg-primary-500 hover:bg-primary-300 font-bold w-80 h-9 "
+                    className={`${bgColor} ${bgHoverColor} font-bold w-80 h-9`}
                     onClick={setButton}
                 >
                     Compra Rapida
@@ -62,10 +69,20 @@ export default function BuyCard({ price, stock, name }) {
                                             <span className="sr-only">
                                                 Close
                                             </span>
-                                            {/* <XMarkIcon
-                                            className="h-6 w-6"
-                                            aria-hidden="true"
-                                        /> */}
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke-width="1.5"
+                                                stroke="currentColor"
+                                                class="w-6 h-6"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    d="M6 18L18 6M6 6l12 12"
+                                                />
+                                            </svg>
                                         </button>
 
                                         <div className="grid w-full grid-cols-1 items-start gap-y-8 gap-x-6 sm:grid-cols-12 lg:gap-x-8">
@@ -77,7 +94,9 @@ export default function BuyCard({ price, stock, name }) {
                                                 />
                                             </div>
                                             <div className="sm:col-span-8 lg:col-span-7">
-                                                <h2 className="text-2xl font-bold text-gray-900 sm:pr-12">
+                                                <h2
+                                                    className={`${textColor} text-2xl font-bold text-gray-900 sm:pr-12`}
+                                                >
                                                     {product.name}
                                                 </h2>
 
@@ -107,7 +126,9 @@ export default function BuyCard({ price, stock, name }) {
                                                     >
                                                         Product options
                                                     </h3>
-                                                    <button className="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-primary-600 py-3 px-8 text-base font-medium text-white hover:bg-primary-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                                                    <button
+                                                        className={`mt-6 flex w-full items-center justify-center rounded-md border border-transparent ${bgColor} py-3 px-8 text-base font-medium text-white ${bgHoverColor} focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2`}
+                                                    >
                                                         Comprar
                                                     </button>
                                                 </section>
