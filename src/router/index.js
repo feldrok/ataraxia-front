@@ -1,5 +1,11 @@
+import Checkout from '../pages/Checkout/Checkout'
 import Home from '../pages/Home/Home'
 import Layout from '../layouts/Layout'
+import ProductPage from '../pages/ProductPage/ProductPage'
+import Signin from '../pages/Signin/Signin'
+import Signinform from '../components/Signinform'
+import Signup from '../pages/Signup/Signup'
+import Signupform from '../components/Signupform'
 import { createBrowserRouter } from 'react-router-dom'
 
 const indexRouter = createBrowserRouter([
@@ -10,9 +16,37 @@ const indexRouter = createBrowserRouter([
             {
                 path: '/',
                 element: <Home />,
-            }
-        ]
-    }
+            },
+            {
+                path: '/product/:id',
+                element: <ProductPage />,
+            },
+        ],
+    },
+    {
+        path: '/checkout',
+        element: <Checkout />,
+    },
+    {
+        path: '/signup',
+        element: <Signup />,
+        children: [
+            {
+                path: '/signup',
+                element: <Signupform />,
+            },
+        ],
+    },
+    {
+        path: '/signin',
+        element: <Signin />,
+        children: [
+            {
+                path: '/signin',
+                element: <Signinform />,
+            },
+        ],
+    },
 ])
 
 export default indexRouter
