@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 
+import Cart from './Cart'
 import Drawer from './Drawer'
+import { Link } from 'react-router-dom'
 
 const routes = [
     {
@@ -18,13 +20,17 @@ const protectedRoutes = [
 
 function Nav() {
     const [isOpen, setIsOpen] = useState(false)
-
+    const [isCartOpen, setIsCartOpen] = useState(false)
     const toggleDrawer = () => {
         setIsOpen(!isOpen)
     }
+    const toggleCartOpen = () => {
+        setIsCartOpen(!isCartOpen)
+    }
+
     return (
         <>
-            <nav className="flex justify-center shadow-md bg-white p-4">
+            <nav className="fixed z-50 w-full flex justify-center shadow-md bg-white p-4">
                 <div>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -41,10 +47,10 @@ function Nav() {
                         />
                     </svg>
                 </div>
-                <div className="flex w-full justify-center">
-                    <h1 className="text-xl font-bold text-primary-500">
-                        Ataraxia
-                    </h1>
+                <div className="flex w-full justify-center select-none">
+                    <Link to="/">
+                        <img src="/ATARAXIA2.png" alt="logo" className="w-36" />
+                    </Link>
                 </div>
                 <div>
                     <svg
@@ -53,6 +59,7 @@ function Nav() {
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
                         className="w-8 h-8 stroke-primary-500 cursor-pointer"
+                        onClick={toggleCartOpen}
                     >
                         <path
                             strokeLinecap="round"
@@ -61,13 +68,13 @@ function Nav() {
                         />
                     </svg>
                 </div>
-                {isOpen ? (
-                    <Drawer
-                        routes={routes}
-                        protectedRoutes={protectedRoutes}
-                        handleOnClick={toggleDrawer}
-                    />
-                ) : null}
+                <Drawer
+                    routes={routes}
+                    protectedRoutes={protectedRoutes}
+                    handleOnClick={toggleDrawer}
+                    isOpen={isOpen}
+                />
+                <Cart handleOnClick={toggleCartOpen} isOpen={isCartOpen} />
             </nav>
         </>
     )
