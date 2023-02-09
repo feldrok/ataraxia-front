@@ -55,6 +55,16 @@ function ProductCard({
         if (category === 'cervezas') {
             return (
                 <>
+                    <div className="rounded-sm relative">
+                        <Link to={`/product/${id}`}>
+                            <img src={image[0]} alt="" />
+                            <img
+                                className="absolute top-0 hover:scale-125 duration-300"
+                                src={image[1]}
+                                alt=""
+                            />
+                        </Link>
+                    </div>
                     <div className="p-2">
                         <Link
                             to={`/product/${id}`}
@@ -129,6 +139,11 @@ function ProductCard({
         } else if (category === 'packs') {
             return (
                 <>
+                    <div className="rounded-sm relative">
+                        <Link to={`/product/${id}`}>
+                            <img src={image[0]} alt="" />
+                        </Link>
+                    </div>
                     <div className="p-2">
                         <Link
                             to={`/product/${id}`}
@@ -201,6 +216,16 @@ function ProductCard({
         } else if (category === 'merch') {
             return (
                 <>
+                    <div className="rounded-sm relative">
+                        <Link to={`/product/${id}`}>
+                            <img src={image[0]} alt="" />
+                            <img
+                                className="absolute top-0 hover:scale-125 hover:-translate-y-10 duration-300"
+                                src={image[1]}
+                                alt=""
+                            />
+                        </Link>
+                    </div>
                     <div className="p-2">
                         <Link
                             to={`/product/${id}`}
@@ -269,17 +294,8 @@ function ProductCard({
         }
     }
 
-    if (image.length > 0) {
-        image = image[0]
-    }
-
     return (
         <div className="flex flex-col w-64 shadow-md hover:scale-105 hover:shadow-none duration-300 rounded-sm select-none">
-            <div className="rounded-sm">
-                <Link to={`/product/${id}`}>
-                    <img src={image} alt="" />
-                </Link>
-            </div>
             {renderDetails(category)}
         </div>
     )
