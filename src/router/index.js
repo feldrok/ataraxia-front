@@ -24,7 +24,7 @@ const indexRouter = createBrowserRouter([
         ],
     },
     {
-        path: '/checkout',
+        path: '/checkout/:id',
         element: <Checkout />,
     },
     {

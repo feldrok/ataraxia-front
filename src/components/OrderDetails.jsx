@@ -1,7 +1,7 @@
 import CartItem from './CartItem'
 import React from 'react'
 
-function OrderDetails() {
+function OrderDetails({user, items, price}) {
     return (
         <div className="grid bg-gray-100 shadow-md rounded-sm m-2">
             <div className="border-b-2 border-gray-300 w-100 py-10 overflow-y-auto h-80">
@@ -33,7 +33,7 @@ function OrderDetails() {
             <div className="flex flex-col w-full justify-center md:justify-end border-t-2 border-gray-300">
                 <div className="flex justify-end w-full text-gray-500 text-lg px-4 gap-2">
                     <p className="text-lg">Subtotal: </p>
-                    <p>$1000</p>
+                    <p>${price}</p>
                 </div>
                 <div className="flex justify-end w-full text-gray-500 text-lg px-4 gap-2">
                     <p className="text-lg">IVA: </p>
@@ -41,7 +41,7 @@ function OrderDetails() {
                 </div>
                 <div className="flex w-full justify-end items-center text-gray-800 gap-2 p-4">
                     <p className="text-lg">Total: </p>
-                    <p className="text-3xl">$1190</p>
+                    <p className="text-3xl">${price + 190}</p>
                 </div>
             </div>
         </div>
