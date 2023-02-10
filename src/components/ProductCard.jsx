@@ -1,6 +1,6 @@
+import AddToCart from './AddToCart'
 import { Link } from 'react-router-dom'
 import React from 'react'
-
 function ProductCard({
     id,
     name,
@@ -33,6 +33,9 @@ function ProductCard({
         bgColor = 'bg-quaternary-500'
         bgHoverColor = 'hover:bg-quaternary-300'
         textColor = 'text-quaternary-500'
+    } else {
+        bgColor = 'bg-gray-700'
+        bgHoverColor = 'hover:bg-gray-500'
     }
 
     const sumQuantity = () => {
@@ -78,9 +81,15 @@ function ProductCard({
                                 ABV <span>{abv}%</span>
                             </p>
                         </div>
-                        <p className="text-gray-600 font-medium text-xl">
-                            ${price}
-                        </p>
+                        {stock > 0 ? (
+                            <p className="text-gray-600 font-medium text-xl">
+                                ${price}
+                            </p>
+                        ) : (
+                            <p className="text-red-500 font-bold text-xl">
+                                Sin Stock
+                            </p>
+                        )}
                     </div>
                     <div
                         className={`flex ${bgColor} ${bgHoverColor} duration-300 p-2 cursor-pointer rounded-sm`}
@@ -159,58 +168,11 @@ function ProductCard({
                             ${price}
                         </p>
                     </div>
-                    <div
-                        className={`flex bg-gray-700 hover:bg-gray-500 duration-300 p-2 cursor-pointer rounded-sm`}
-                    >
-                        <div className="flex border rounded-md bg-gray-100 shadow-md">
-                            <button
-                                className="hover:bg-gray-300"
-                                onClick={reduceQuantity}
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth={1.5}
-                                    className="w-6 h-6 stroke-gray-500"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M19.5 12h-15"
-                                    />
-                                </svg>
-                            </button>
-                            <input
-                                className="w-10 text-center outline-none"
-                                value={quantity}
-                                defaultValue={quantity}
-                                max={stock}
-                                type="number"
-                            />
-                            <button
-                                className="hover:bg-gray-300"
-                                onClick={sumQuantity}
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth={1.5}
-                                    className="w-6 h-6 stroke-gray-500"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M12 4.5v15m7.5-7.5h-15"
-                                    />
-                                </svg>
-                            </button>
-                        </div>
-                        <button className="text-white font-bold w-full h-full">
-                            Agregar al carro
-                        </button>
-                    </div>
+                    <AddToCart
+                        stock={stock}
+                        bgColor={bgColor}
+                        bgHoverColor={bgHoverColor}
+                    />
                 </>
             )
         } else if (category === 'merch') {
@@ -237,58 +199,13 @@ function ProductCard({
                             ${price}
                         </p>
                     </div>
-                    <div
-                        className={`flex bg-gray-700 hover:bg-gray-500 duration-300 p-2 cursor-pointer rounded-sm`}
-                    >
-                        <div className="flex border rounded-md bg-gray-100 shadow-md">
-                            <button
-                                className="hover:bg-gray-300"
-                                onClick={reduceQuantity}
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth={1.5}
-                                    className="w-6 h-6 stroke-gray-500"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M19.5 12h-15"
-                                    />
-                                </svg>
-                            </button>
-                            <input
-                                className="w-10 text-center outline-none"
-                                value={quantity}
-                                defaultValue={quantity}
-                                max={stock}
-                                type="number"
-                            />
-                            <button
-                                className="hover:bg-gray-300"
-                                onClick={sumQuantity}
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth={1.5}
-                                    className="w-6 h-6 stroke-gray-500"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M12 4.5v15m7.5-7.5h-15"
-                                    />
-                                </svg>
-                            </button>
-                        </div>
-                        <button className="text-white font-bold w-full h-full">
-                            Agregar al carro
-                        </button>
-                    </div>
+                    <AddToCart
+                        stock={stock}
+                        bgColor={bgColor}
+                        bgHoverColor={bgHoverColor}
+                        width={80}
+                        className="w-60"
+                    />
                 </>
             )
         }
