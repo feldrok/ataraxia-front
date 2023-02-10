@@ -18,7 +18,6 @@ function Home() {
         dispatch(getCategories())
         dispatch(getProducts())
     }, [])
-
     const filteredProducts = (category) => {
         return storeProducts.products.response?.filter(
             (product) => product.category_id === category
