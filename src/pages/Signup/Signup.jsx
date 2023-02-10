@@ -7,7 +7,6 @@ function Signup() {
     return (
         <>
             <Nav />
-
             <div className="flex relative h-screen">
                 <div className="flex flex-col justify-center items-center bg-white w-full h-full lg:w-1/2">
                     <div className="flex flex-col justify-center items-center w-full">
