@@ -1,35 +1,37 @@
 import React, { useEffect, useState } from 'react'
 
 import cartActions from '../store/carts/actions'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-const { getCart, addProductToCart } = cartActions
+const { getCart, addProductToCart, createCart } = cartActions
 
 export const AddToCart = ({ stock, bgColor, bgHoverColor, id }) => {
     const [quantity, setQuantity] = useState(1)
     const [loading, setLoading] = useState(false)
+    const storeCart = useSelector((store) => store.cart)
     const dispatch = useDispatch()
 
     const handleAdd = async () => {
-        let user_id = '63e40a702798dd1fdd45703a'
-        let productUpdate = {
-            product_id: id,
-            quantity: quantity,
-        }
         try {
             setLoading(true)
             if (quantity === 0) {
                 alert('No hay stock')
             } else {
-                await dispatch(
-                    addProductToCart({ id: user_id, products: productUpdate })
-                )
+                let product = {
+                    product_id: id,
+                    quantity: quantity,
+                }
+                if (storeCart.cart.cart?.response?.length === 0) {
+                    await dispatch(createCart(product))
+                } else {
+                    await dispatch(addProductToCart(product))
+                }
             }
         } catch (error) {
             console.log(error)
         } finally {
             setLoading(false)
-            await dispatch(getCart(user_id))
+            await dispatch(getCart())
         }
     }
 
@@ -79,6 +81,7 @@ export const AddToCart = ({ stock, bgColor, bgHoverColor, id }) => {
                 <input
                     className="w-10 text-center outline-none"
                     value={quantity}
+                    onChange={(e) => setQuantity(e.target.value)}
                     max={stock}
                     type="number"
                 />

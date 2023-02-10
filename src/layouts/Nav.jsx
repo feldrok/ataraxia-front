@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Cart from './Cart'
 import Drawer from './Drawer'
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import userActions from '../store/users/actions'
 
+const { signout } = userActions
 const routes = [
     {
         path: '/',
@@ -18,28 +21,41 @@ const protectedRoutes = [
     },
 ]
 
-function Nav() {
+function Nav({ session }) {
     const [isOpen, setIsOpen] = useState(false)
     const [isCartOpen, setIsCartOpen] = useState(false)
-    const [isLogged, setIsLogged] = useState(false)
+    const [isLogged, setIsLogged] = useState(session)
+    const storeUser = useSelector((store) => store.user)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        setIsLogged(session)
+    }, [storeUser, session])
 
     const toggleDrawer = () => {
         setIsOpen(!isOpen)
     }
+
     const toggleCartOpen = () => {
         setIsCartOpen(!isCartOpen)
     }
 
+    const handleLogout = () => {
+        dispatch(signout())
+        localStorage.removeItem('token')
+        setIsLogged(false)
+    }
+
     return (
         <>
-            <nav className="fixed z-50 w-full flex justify-between shadow-md bg-white p-4">
+            <nav className="fixed z-50 flex w-full justify-between bg-white p-4 shadow-md">
                 <div className="flex">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
                         strokeWidth={2}
-                        className="h-8 w-8 cursor-pointer stroke-primary-500 hover:stroke-tertiary-500 duration-300"
+                        className="h-8 w-8 cursor-pointer stroke-primary-500 duration-300 hover:stroke-tertiary-500"
                         onClick={toggleDrawer}
                     >
                         <path
@@ -49,30 +65,30 @@ function Nav() {
                         />
                     </svg>
                 </div>
-                <div className="flex w-36 absolute left-0 right-0 m-auto select-none">
+                <div className="absolute left-0 right-0 m-auto flex w-36 select-none">
                     <Link to="/">
                         <img src="/ATARAXIA2.png" alt="logo" className="w-36" />
                     </Link>
                 </div>
-                <div className="flex gap-2 items-center">
-                    <div className="hidden md:flex gap-4 pr-4">
+                <div className="flex items-center gap-2">
+                    <div className="hidden gap-4 pr-4 md:flex">
                         {isLogged ? (
-                            <Link
-                                className="text-primary-500 hover:text-tertiary-500 duration-300"
-                                to="/logout"
+                            <button
+                                className="text-primary-500 duration-300 hover:text-tertiary-500"
+                                onClick={handleLogout}
                             >
                                 Cerrar Sesión
-                            </Link>
+                            </button>
                         ) : (
                             <>
                                 <Link
-                                    className="text-primary-500 hover:text-tertiary-500 duration-300"
+                                    className="text-primary-500 duration-300 hover:text-tertiary-500"
                                     to="/signin"
                                 >
                                     Iniciar Sesión
                                 </Link>
                                 <Link
-                                    className="text-primary-500 hover:text-tertiary-500 duration-300 "
+                                    className="text-primary-500 duration-300 hover:text-tertiary-500 "
                                     to="/signup"
                                 >
                                     Registrarse
@@ -86,7 +102,7 @@ function Nav() {
                             fill="none"
                             viewBox="0 0 24 24"
                             strokeWidth={1.5}
-                            className="w-8 h-8 stroke-primary-500 cursor-pointer hover:stroke-tertiary-500 duration-300"
+                            className="h-8 w-8 cursor-pointer stroke-primary-500 duration-300 hover:stroke-tertiary-500"
                             onClick={toggleCartOpen}
                         >
                             <path

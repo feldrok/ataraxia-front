@@ -45,24 +45,25 @@ function Slider() {
     }
 
     return (
-        <div className="w-full select-none relative z-10 max-w-7xl justify-center flex overflow-hidden">
+        <div className="relative z-10 flex w-full max-w-7xl select-none justify-center overflow-hidden">
             <div
                 style={{
                     transform: `translate3d(${-currentIndex * 100}%, 0, 0)`,
                 }}
-                className={`aspect-w-16 z-10 whitespace-nowrap aspect-h-9 w-full duration-300`}
+                className={`aspect-w-16 aspect-h-9 z-10 w-full whitespace-nowrap duration-300`}
             >
                 {images.map((image) => (
                     <img
-                        className="h-96 inline-block w-full object-cover"
+                        key={image.image}
+                        className="inline-block h-96 w-full object-cover"
                         src={image.image}
                         alt=""
                     />
                 ))}
             </div>
-            <div className="absolute z-10 w-full top-1/2 transform -translate-y-1/2 px-3 flex justify-between items-center">
+            <div className="absolute top-1/2 z-10 flex w-full -translate-y-1/2 transform items-center justify-between px-3">
                 <button
-                    className="hover:bg-primary-500 rounded-full p-2 duration-300"
+                    className="rounded-full p-2 duration-300 hover:bg-primary-500"
                     onClick={handlePrev}
                 >
                     <svg
@@ -70,7 +71,7 @@ function Slider() {
                         fill="none"
                         viewBox="0 0 24 24"
                         strokeWidth={2}
-                        className="w-8 h-8 stroke-white"
+                        className="h-8 w-8 stroke-white"
                     >
                         <path
                             strokeLinecap="round"
@@ -80,7 +81,7 @@ function Slider() {
                     </svg>
                 </button>
                 <button
-                    className="hover:bg-primary-500 rounded-full p-2 duration-300"
+                    className="rounded-full p-2 duration-300 hover:bg-primary-500"
                     onClick={handleNext}
                 >
                     <svg
@@ -88,7 +89,7 @@ function Slider() {
                         fill="none"
                         viewBox="0 0 24 24"
                         strokeWidth={2}
-                        className="w-8 h-8 stroke-white"
+                        className="h-8 w-8 stroke-white"
                     >
                         <path
                             strokeLinecap="round"

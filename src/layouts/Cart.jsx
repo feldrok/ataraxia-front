@@ -43,7 +43,7 @@ function Cart({ handleOnClick, isOpen }) {
                         </div>
                         <div className="flex w-full flex-col justify-center p-2">
                             {products?.map((product) => (
-                                <CartItem key={product.id} product={product} />
+                                <CartItem key={product._id} product={product} />
                             ))}
                         </div>
                     </div>

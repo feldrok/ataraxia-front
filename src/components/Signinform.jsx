@@ -4,22 +4,22 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import userActions from '../store/users/actions'
 
-const { signIn, signInToken } = userActions
+const { signIn } = userActions
 
 function Signin() {
     const userStore = useSelector((state) => state.user)
     console.log(userStore)
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    let inputMail = useRef("")
-    let inputPassword = useRef("")
+    let inputMail = useRef('')
+    let inputPassword = useRef('')
 
     useEffect(() => {
         if (userStore.user === null) {
             alert(userStore.message)
-        } if (userStore.user?.success === true) {
-            localStorage.setItem("token", userStore.user.response?.token)
-            navigate("/")
+        }
+        if (userStore.user?.success === true) {
+            navigate('/')
         }
     }, [userStore])
 
@@ -29,18 +29,19 @@ function Signin() {
             mail: inputMail.current.value,
             password: inputPassword.current.value,
         }
-        await dispatch(signIn(user))
+        let response = await dispatch(signIn(user))
+        localStorage.setItem('token', response.payload.user.response.token)
     }
 
     return (
         <>
-            <div className="flex flex-col justify-center items-center p-10">
-                <h1 className="text-2xl flex-wrap text-gray-500 text-center max-w-md">
+            <div className="flex flex-col items-center justify-center p-10">
+                <h1 className="max-w-md flex-wrap text-center text-2xl text-gray-500">
                     Iniciá sesión para comprar tus cervezas favoritas!
                 </h1>
             </div>
-            <div className="flex flex-col justify-center items-center w-full max-w-md">
-                <form onSubmit={(e) => handleSignIn(e)} className="p-4 w-full">
+            <div className="flex w-full max-w-md flex-col items-center justify-center">
+                <form onSubmit={(e) => handleSignIn(e)} className="w-full p-4">
                     <div className="w-full">
                         <label className="text-primary-400 " htmlFor="mail">
                             E-Mail
@@ -48,7 +49,7 @@ function Signin() {
                         <input
                             autoComplete="false"
                             type="text"
-                            className="flex flex-col justify-center items-center p-2 w-full border rounded-sm shadow-sm mb-4 no-underline transition-all duration-100 ease-in-out"
+                            className="mb-4 flex w-full flex-col items-center justify-center rounded-sm border p-2 no-underline shadow-sm transition-all duration-100 ease-in-out"
                             id="mail"
                             ref={inputMail}
                         />
@@ -60,16 +61,16 @@ function Signin() {
                         <input
                             autoComplete="false"
                             type="password"
-                            className="flex flex-col justify-center items-center p-2 w-full border rounded-sm shadow-sm mb-4 no-underline transition-all duration-100 ease-in-out"
+                            className="mb-4 flex w-full flex-col items-center justify-center rounded-sm border p-2 no-underline shadow-sm transition-all duration-100 ease-in-out"
                             id="password"
                             ref={inputPassword}
                         />
                     </div>
                     <div className="flex items-center">
                         <button
-                            className="flex w-full justify-center no-underline p-3 bg-primary-300 text-white rounded-sm border-none cursor-pointer text-lg font-bold transition-all duration-100 ease-in-out"
-                            type='submit'
-/*                             to={'/'} */
+                            className="flex w-full cursor-pointer justify-center rounded-sm border-none bg-primary-300 p-3 text-lg font-bold text-white no-underline transition-all duration-100 ease-in-out"
+                            type="submit"
+                            /*                             to={'/'} */
                         >
                             Iniciar sesión
                         </button>
