@@ -14,7 +14,7 @@ function CartItem({ product }) {
 
     useEffect(() => {
         setQuantity(product?.quantity)
-    }, [])
+    }, [product])
 
     const handleUpdate = async (quant) => {
         let id = '63e40a702798dd1fdd45703a'
@@ -37,7 +37,6 @@ function CartItem({ product }) {
         let id = '63e40a702798dd1fdd45703a'
         try {
             setLoading(true)
-            console.log(loading)
             await dispatch(
                 deleteItem({ id: id, product_id: { product_id: producto._id } })
             )
@@ -63,6 +62,8 @@ function CartItem({ product }) {
         if (quantity === 1) {
             handleUpdate(1)
             setQuantity(1)
+        } else if (quantity === 0) {
+            handleDeleteItem()
         } else {
             handleUpdate(quantity - 1)
             setQuantity(quantity - 1)

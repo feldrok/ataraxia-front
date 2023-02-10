@@ -1,6 +1,7 @@
 import AddToCart from './AddToCart'
 import FastBuy from './FastBuy'
 import React from 'react'
+import { useParams } from 'react-router'
 function ProductDetail({
     abv,
     ibu,
@@ -15,16 +16,17 @@ function ProductDetail({
     bgColor,
     bgHoverColor,
 }) {
+    const { id } = useParams()
     if (image?.length > 0) {
         image = image[0]
     }
 
     return (
-        <div className="flex flex-wrap justify-center pt-20 pb-40 w-full">
-            <div className="w-full lg:w-1/2 p-4 flex justify-center">
+        <div className="flex w-full flex-wrap justify-center pt-20 pb-40">
+            <div className="flex w-full justify-center p-4 lg:w-1/2">
                 <img className="shadow-md" src={image} alt={name} />
             </div>
-            <div className="flex flex-col justify-evenly w-full lg:w-1/2 p-4">
+            <div className="flex w-full flex-col justify-evenly p-4 lg:w-1/2">
                 <div>
                     <div className="flex flex-col gap-6">
                         <h1
@@ -36,7 +38,7 @@ function ProductDetail({
                         </h1>
                         <p className="text-gray-600">{description}</p>
                     </div>
-                    <div className="text-xl flex flex-col gap-2 font-bold py-4">
+                    <div className="flex flex-col gap-2 py-4 text-xl font-bold">
                         <h2
                             className={
                                 stock === 0 ? 'text-red-500' : 'text-gray-600'
@@ -95,7 +97,7 @@ function ProductDetail({
                             </h2>
                         ) : null}
                     </div>
-                    <h1 className="text-4xl font-bold py-4">${price}</h1>
+                    <h1 className="py-4 text-4xl font-bold">${price}</h1>
                 </div>
                 {stock > 0 ? (
                     <div className="flex flex-col gap-4">
@@ -103,8 +105,7 @@ function ProductDetail({
                             stock={stock}
                             bgColor={bgColor}
                             bgHoverColor={bgHoverColor}
-                            width={80}
-                            className="w-60"
+                            id={id}
                         />
                         <FastBuy
                             textColor={textColor}
@@ -118,7 +119,7 @@ function ProductDetail({
                     </div>
                 ) : (
                     <div>
-                        <h1 className="text-2xl font-bold py-4 text-gray-600">
+                        <h1 className="py-4 text-2xl font-bold text-gray-600">
                             Producto sin stock, porfavor intenta más tarde.
                         </h1>
                     </div>

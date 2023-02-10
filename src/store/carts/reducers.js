@@ -1,7 +1,14 @@
 import cartActions from './actions'
 import { createReducer } from '@reduxjs/toolkit'
 
-const { createCart, getCart, updateCart, emptyCart } = cartActions
+const {
+    createCart,
+    getCart,
+    addProductToCart,
+    updateCart,
+    deleteItem,
+    emptyCart,
+} = cartActions
 
 const initialState = {
     cart: [],
@@ -34,6 +41,20 @@ const cartReducer = createReducer(initialState, (builder) => {
         .addCase(emptyCart.fulfilled, (state, action) => {
             let newState = {
                 cart: action.payload,
+                message: action.payload.message,
+            }
+            return newState
+        })
+        .addCase(deleteItem.fulfilled, (state, action) => {
+            let newState = {
+                cart: state.cart,
+                message: action.payload.message,
+            }
+            return newState
+        })
+        .addCase(addProductToCart.fulfilled, (state, action) => {
+            let newState = {
+                cart: state.cart,
                 message: action.payload.message,
             }
             return newState
