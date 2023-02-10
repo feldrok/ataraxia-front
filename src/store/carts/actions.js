@@ -33,6 +33,29 @@ const getCart = createAsyncThunk('cart/getCart', async (id) => {
     }
 })
 
+const addProductToCart = createAsyncThunk(
+    'cart/addProductToCart',
+    async ({ id, products }) => {
+        try {
+            const response = await axios.put(
+                `${API_URL}/cart/add/${id}`,
+                products
+            )
+            console.log(response)
+            return {
+                cart: response.data,
+                message: 'Product added to cart successfully',
+            }
+        } catch (error) {
+            console.log(error)
+            return {
+                cart: null,
+                message: error.message,
+            }
+        }
+    }
+)
+
 const updateCart = createAsyncThunk(
     'cart/updateCart',
     async ({ id, products }) => {
@@ -93,6 +116,7 @@ const emptyCart = createAsyncThunk('cart/emptyCart', async (id) => {
 const cartActions = {
     createCart,
     getCart,
+    addProductToCart,
     updateCart,
     deleteItem,
     emptyCart,

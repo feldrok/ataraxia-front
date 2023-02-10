@@ -22,7 +22,7 @@ const FormCheckout = () => {
     return (
         <>
             <div className="grid grid-cols-1 pt-20 md:grid-cols-2">
-                <div className="flex flex-col items-center justify-center">
+                <div className="order-2 flex flex-col items-center justify-center md:order-1">
                     <div className="text-center">
                         <p className="font-light">
                             Ingresa tus datos para el envío y facturación, o{' '}
