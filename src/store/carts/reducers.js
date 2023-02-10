@@ -26,7 +26,7 @@ const cartReducer = createReducer(initialState, (builder) => {
         })
         .addCase(updateCart.fulfilled, (state, action) => {
             let newState = {
-                cart: action.payload,
+                cart: state.cart,
                 message: action.payload.message,
             }
             return newState

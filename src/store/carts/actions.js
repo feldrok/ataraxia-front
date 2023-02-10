@@ -58,7 +58,7 @@ const deleteItem = createAsyncThunk(
     'cart/deleteItem',
     async ({ id, product_id }) => {
         try {
-            const response = await axios.delete(
+            const response = await axios.put(
                 `${API_URL}/cart/delete/${id}`,
                 product_id
             )
@@ -77,7 +77,7 @@ const deleteItem = createAsyncThunk(
 
 const emptyCart = createAsyncThunk('cart/emptyCart', async (id) => {
     try {
-        const response = await axios.delete(`${API_URL}/cart/empty/${id}`)
+        const response = await axios.put(`${API_URL}/cart/empty/${id}`)
         return {
             cart: response.data,
             message: 'Cart emptied successfully',

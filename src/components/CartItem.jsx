@@ -1,34 +1,94 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
-function CartItem() {
+import { ThreeDots } from 'react-loading-icons'
+import cartActions from '../store/carts/actions'
+import { useDispatch } from 'react-redux'
+
+const { getCart, updateCart, deleteItem } = cartActions
+
+function CartItem({ product }) {
+    const dispatch = useDispatch()
     const [quantity, setQuantity] = React.useState(1)
+    const [loading, setLoading] = React.useState(false)
+    const producto = product.product_id
+
+    useEffect(() => {
+        setQuantity(product?.quantity)
+    }, [])
+
+    const handleUpdate = async (quant) => {
+        let id = '63e40a702798dd1fdd45703a'
+        let productUpdate = {
+            product_id: producto._id,
+            quantity: quant,
+        }
+        try {
+            setLoading(true)
+            await dispatch(updateCart({ id: id, products: productUpdate }))
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setLoading(false)
+            await dispatch(getCart(id))
+        }
+    }
+
+    const handleDeleteItem = async () => {
+        let id = '63e40a702798dd1fdd45703a'
+        try {
+            setLoading(true)
+            console.log(loading)
+            await dispatch(
+                deleteItem({ id: id, product_id: { product_id: producto._id } })
+            )
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setLoading(false)
+            await dispatch(getCart(id))
+        }
+    }
 
     const sumQuantity = () => {
-        setQuantity(quantity + 1)
+        if (quantity !== producto?.stock) {
+            handleUpdate(quantity + 1)
+            setQuantity(quantity + 1)
+        } else {
+            handleUpdate(product?.stock)
+            setQuantity(producto?.stock)
+        }
     }
 
     const reduceQuantity = () => {
         if (quantity === 1) {
+            handleUpdate(1)
             setQuantity(1)
         } else {
+            handleUpdate(quantity - 1)
             setQuantity(quantity - 1)
         }
     }
 
     return (
-        <div className="flex w-full p-1 gap-2 justify-center">
+        <div className="relative flex w-full justify-center gap-2 p-1">
+            {loading === true ? (
+                <div className="absolute flex h-full w-full items-center justify-center bg-[rgba(255,255,255,.8)]">
+                    <ThreeDots stroke="black" />
+                </div>
+            ) : null}
+
             <div className="flex">
                 <img
-                    className="w-32 h-32 object-cover rounded-md shadow-md"
-                    src="https://firebasestorage.googleapis.com/v0/b/ataraxiapp-7a9cb.appspot.com/o/blondeale.jpg?alt=media&token=f681943f-e618-4ac4-b4e7-3b0e00c6baeb"
+                    className="h-32 w-32 rounded-md object-cover shadow-md"
+                    src={producto?.image[0]}
                     alt=""
                 />
             </div>
-            <div className="flex flex-col p-2 justify-evenly">
-                <h1 className="font-bold text-gray-800">Blonde Ale</h1>
+            <div className="flex flex-col justify-evenly p-2">
+                <h1 className="font-bold text-gray-800">{producto?.name}</h1>
                 <p className="text-sm text-gray-600">355ml</p>
                 <p className="text-sm text-gray-600">Botella</p>
-                <div className="flex border rounded-md bg-gray-100 shadow-md">
+                <div className="flex rounded-md border bg-gray-100 shadow-md">
                     <button
                         className="hover:bg-gray-300"
                         onClick={reduceQuantity}
@@ -38,7 +98,7 @@ function CartItem() {
                             fill="none"
                             viewBox="0 0 24 24"
                             strokeWidth={1.5}
-                            className="w-6 h-6 stroke-gray-500"
+                            className="h-6 w-6 stroke-gray-500"
                         >
                             <path
                                 strokeLinecap="round"
@@ -50,7 +110,6 @@ function CartItem() {
                     <input
                         className="w-10 text-center outline-none"
                         value={quantity}
-                        defaultValue={quantity}
                         type="number"
                     />
                     <button className="hover:bg-gray-300" onClick={sumQuantity}>
@@ -59,7 +118,7 @@ function CartItem() {
                             fill="none"
                             viewBox="0 0 24 24"
                             strokeWidth={1.5}
-                            className="w-6 h-6 stroke-gray-500"
+                            className="h-6 w-6 stroke-gray-500"
                         >
                             <path
                                 strokeLinecap="round"
@@ -70,14 +129,15 @@ function CartItem() {
                     </button>
                 </div>
             </div>
-            <div className="p-2 flex flex-col justify-between">
+            <div className="flex flex-col justify-between p-2">
                 <div className="flex w-full justify-end">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
-                        className="w-6 h-6 stroke-gray-500"
+                        className="h-6 w-6 cursor-pointer stroke-gray-500"
+                        onClick={handleDeleteItem}
                     >
                         <path
                             strokeLinecap="round"
@@ -87,8 +147,12 @@ function CartItem() {
                     </svg>
                 </div>
                 <div className="flex flex-col">
-                    <h2 className="text-gray-800">$Unit</h2>
-                    <h1 className="text-gray-900">$Total</h1>
+                    <h2 className="whitespace-nowrap text-sm text-gray-800">
+                        ${producto?.price} c/u
+                    </h2>
+                    <h1 className="font-bold text-gray-900">
+                        ${producto?.price * quantity}
+                    </h1>
                 </div>
             </div>
         </div>
