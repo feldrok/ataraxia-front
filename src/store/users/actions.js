@@ -57,7 +57,7 @@ const signIn = createAsyncThunk("signIn", async (user) => {
     } catch (error) {
         return {
             user: null,
-            message: error.message,
+            message: error.response.data.response,
         }
     }
 })

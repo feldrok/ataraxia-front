@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import userActions from '../store/users/actions'
@@ -14,15 +14,22 @@ function Signin() {
     let inputMail = useRef("")
     let inputPassword = useRef("")
 
+    useEffect(() => {
+        if (userStore.user === null) {
+            alert(userStore.message)
+        } if (userStore.user?.success === true) {
+            localStorage.setItem("token", userStore.user.response?.token)
+            navigate("/")
+        }
+    }, [userStore])
+
     const handleSignIn = async (e) => {
         e.preventDefault()
         let user = {
             mail: inputMail.current.value,
             password: inputPassword.current.value,
         }
-        dispatch(signIn(user))
-        localStorage.setItem("token", userStore.user?.token)
-        navigate("/")
+        await dispatch(signIn(user))
     }
 
     return (
@@ -59,13 +66,13 @@ function Signin() {
                         />
                     </div>
                     <div className="flex items-center">
-                        <Link
+                        <button
                             className="flex w-full justify-center no-underline p-3 bg-primary-300 text-white rounded-sm border-none cursor-pointer text-lg font-bold transition-all duration-100 ease-in-out"
                             type='submit'
-                            to={'/'}
+/*                             to={'/'} */
                         >
                             Iniciar sesión
-                        </Link>
+                        </button>
                     </div>
                 </form>
             </div>

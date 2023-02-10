@@ -5,7 +5,6 @@ const { signIn, signInToken, addUser, verifyUser } = userActions
 
 const initialState = {
     user: [],
-    accessToken: "",
     message: ""
 }
 
@@ -14,7 +13,6 @@ const userReducer = createReducer(initialState, (builder) => {
         .addCase(signIn.fulfilled, (state, action) => {
             let newState = {
                 user: action.payload.user,
-                accessToken: action.payload.token,
                 message: action.payload.message
             }
             return newState
