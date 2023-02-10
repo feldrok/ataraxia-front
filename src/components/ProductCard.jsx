@@ -1,5 +1,13 @@
-import { Link } from 'react-router-dom'
-import React from 'react'
+import { Link, useParams } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import cartActions from '../store/carts/actions'
+import { useDispatch, useSelector } from 'react-redux'
+
+
+
+const {getCart, updateCart } = cartActions
+
+
 
 function ProductCard({
     id,
@@ -34,6 +42,10 @@ function ProductCard({
         bgHoverColor = 'hover:bg-quaternary-300'
         textColor = 'text-quaternary-500'
     }
+    const dispatch = useDispatch()
+    const cart = useSelector((state) => state.cart.cart)
+    console.log(cart)
+    
 
     const sumQuantity = () => {
         if (quantity !== stock) {
@@ -42,8 +54,11 @@ function ProductCard({
             setQuantity(stock)
         }
     }
+    
+    
+    
 
-    const reduceQuantity = () => {
+    function reduceQuantity() {
         if (quantity === 1) {
             setQuantity(1)
         } else if (quantity > 1) {
@@ -52,6 +67,17 @@ function ProductCard({
     }
 
     const renderDetails = (category) => {
+        const addToCart = () =>{
+            dispatch(updateCart(id, quantity))
+            dispatch(getCart(id))
+            if(cart.length===0){
+                return(
+                    <div className="flex flex-col items-center justify-center">
+                        <h1 className="text-2xl font-bold text-gray-800">Your cart is empty</h1>
+                    </div>
+                )
+            }
+        }
         if (category === 'cervezas') {
             return (
                 <>
@@ -120,7 +146,7 @@ function ProductCard({
                                 </svg>
                             </button>
                         </div>
-                        <button className="text-white font-bold w-full h-full">
+                        <button onClick={addToCart} className="text-white font-bold w-full h-full">
                             Agregar al carro
                         </button>
                     </div>

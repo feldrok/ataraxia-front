@@ -1,7 +1,12 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+import cartActions from '../store/carts/actions'
+
+const {getCart, updateCart, deleteItem, emptyCart} = cartActions
 
 function CartItem() {
     const [quantity, setQuantity] = React.useState(1)
+    const productStore = useSelector((store) => store.cart.cart.response)
 
     const sumQuantity = () => {
         setQuantity(quantity + 1)
@@ -16,6 +21,8 @@ function CartItem() {
     }
 
     return (
+        <>
+        {productStore?.map((card, index)=>{
         <div className="flex w-full p-1 gap-2 justify-center">
             <div className="flex">
                 <img
@@ -25,7 +32,7 @@ function CartItem() {
                 />
             </div>
             <div className="flex flex-col p-2 justify-evenly">
-                <h1 className="font-bold text-gray-800">Blonde Ale</h1>
+                <h1 className="font-bold text-gray-800">{card.name}</h1>
                 <p className="text-sm text-gray-600">355ml</p>
                 <p className="text-sm text-gray-600">Botella</p>
                 <div className="flex border rounded-md bg-gray-100 shadow-md">
@@ -92,6 +99,8 @@ function CartItem() {
                 </div>
             </div>
         </div>
+        })}
+        </>
     )
 }
 

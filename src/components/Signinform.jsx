@@ -1,13 +1,15 @@
 import { Link, useNavigate } from 'react-router-dom'
 import React, { useRef } from 'react'
+import cartActions from '../store/carts/actions'
+const {createCart} = cartActions
 
-import { useDispatch } from 'react-redux'
 
 /* import userActions from "../../store/user/actions" */
 
 /* const { addUser } = userActions */
 
 function Signin() {
+    createCart()
     return (
         <>
             <div className="flex flex-col justify-center items-center p-10">
