@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 import cartActions from '../store/carts/actions'
-import { useDispatch, useSelector } from 'react-redux'
+import { decodeToken } from 'react-jwt'
 
 const { getCart, addProductToCart, createCart } = cartActions
 
@@ -12,6 +13,11 @@ export const AddToCart = ({ stock, bgColor, bgHoverColor, id }) => {
     const dispatch = useDispatch()
 
     const handleAdd = async () => {
+        let token = localStorage.getItem('token')
+        if (token) {
+            token = decodeToken(localStorage.getItem('token')).id
+        }
+        let guestToken = localStorage.getItem('guestToken')
         try {
             setLoading(true)
             if (quantity === 0) {
@@ -22,16 +28,26 @@ export const AddToCart = ({ stock, bgColor, bgHoverColor, id }) => {
                     quantity: quantity,
                 }
                 if (storeCart.cart.cart?.response?.length === 0) {
-                    await dispatch(createCart(product))
+                    await dispatch(
+                        createCart({
+                            id: token ? token : guestToken,
+                            data: product,
+                        })
+                    )
                 } else {
-                    await dispatch(addProductToCart(product))
+                    await dispatch(
+                        addProductToCart({
+                            id: token ? token : guestToken,
+                            product: product,
+                        })
+                    )
                 }
             }
         } catch (error) {
             console.log(error)
         } finally {
             setLoading(false)
-            await dispatch(getCart())
+            await dispatch(getCart(token ? token : guestToken))
         }
     }
 

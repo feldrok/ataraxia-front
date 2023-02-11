@@ -5,7 +5,6 @@ const API_URL = process.env.REACT_APP_API_URL
 
 const handleToken = () => {
     const BEARER_TOKEN = localStorage.getItem('token')
-    const GUEST_TOKEN = localStorage.getItem('guest_token')
     if (BEARER_TOKEN) {
         let config = {
             headers: {
@@ -17,10 +16,10 @@ const handleToken = () => {
     }
 }
 
-const createCart = createAsyncThunk('cart/createCart', async (data) => {
+const createCart = createAsyncThunk('cart/createCart', async ({ id, data }) => {
     try {
         const response = await axios.post(
-            `${API_URL}/cart`,
+            `${API_URL}/cart/${id}`,
             data,
             handleToken()
         )
@@ -37,9 +36,9 @@ const createCart = createAsyncThunk('cart/createCart', async (data) => {
     }
 })
 
-const getCart = createAsyncThunk('cart/getCart', async () => {
+const getCart = createAsyncThunk('cart/getCart', async (id) => {
     try {
-        const response = await axios.get(`${API_URL}/cart`, handleToken())
+        const response = await axios.get(`${API_URL}/cart/${id}`, handleToken())
         return {
             cart: response.data,
             message: 'Cart fetched successfully',
@@ -54,10 +53,10 @@ const getCart = createAsyncThunk('cart/getCart', async () => {
 
 const addProductToCart = createAsyncThunk(
     'cart/addProductToCart',
-    async (product) => {
+    async ({ id, product }) => {
         try {
             const response = await axios.put(
-                `${API_URL}/cart/add`,
+                `${API_URL}/cart/add/${id}`,
                 product,
                 handleToken()
             )
@@ -76,43 +75,50 @@ const addProductToCart = createAsyncThunk(
     }
 )
 
-const updateCart = createAsyncThunk('cart/updateCart', async (product) => {
-    try {
-        const response = await axios.put(
-            `${API_URL}/cart/update`,
-            product,
-            handleToken()
-        )
-        return {
-            cart: response.data,
-            message: 'Cart updated successfully',
-        }
-    } catch (error) {
-        return {
-            cart: null,
-            message: error.message,
+const updateCart = createAsyncThunk(
+    'cart/updateCart',
+    async ({ id, product }) => {
+        try {
+            const response = await axios.put(
+                `${API_URL}/cart/update/${id}`,
+                product,
+                handleToken()
+            )
+            return {
+                cart: response.data,
+                message: 'Cart updated successfully',
+            }
+        } catch (error) {
+            console.log(error)
+            return {
+                cart: null,
+                message: error.message,
+            }
         }
     }
-})
+)
 
-const deleteItem = createAsyncThunk('cart/deleteItem', async (product_id) => {
-    try {
-        const response = await axios.put(
-            `${API_URL}/cart/delete`,
-            product_id,
-            handleToken()
-        )
-        return {
-            cart: response.data,
-            message: 'Item deleted successfully',
-        }
-    } catch (error) {
-        return {
-            cart: null,
-            message: error.message,
+const deleteItem = createAsyncThunk(
+    'cart/deleteItem',
+    async ({ id, product_id }) => {
+        try {
+            const response = await axios.put(
+                `${API_URL}/cart/delete/${id}`,
+                product_id,
+                handleToken()
+            )
+            return {
+                cart: response.data,
+                message: 'Item deleted successfully',
+            }
+        } catch (error) {
+            return {
+                cart: null,
+                message: error.message,
+            }
         }
     }
-})
+)
 
 const emptyCart = createAsyncThunk('cart/emptyCart', async () => {
     try {
