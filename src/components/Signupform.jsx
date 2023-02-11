@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { computeHeadingLevel } from '@testing-library/react'
-import userActions from "../store/users/actions"
+import userActions from '../store/users/actions'
 
 const { addUser } = userActions
 
@@ -11,13 +11,12 @@ function SignupUser() {
     const userStore = useSelector((state) => state.user)
     console.log(userStore)
     const dispatch = useDispatch()
-    const name = useRef("")
-    const lastName = useRef("")
-    const dni = useRef("")
-    const mail = useRef("")
-    const password = useRef("")
+    const name = useRef('')
+    const lastName = useRef('')
+    const dni = useRef('')
+    const mail = useRef('')
+    const password = useRef('')
     const navigate = useNavigate()
-
 
     const captureData = async (e) => {
         e.preventDefault()
@@ -29,28 +28,27 @@ function SignupUser() {
             password: password.current.value,
         }
         dispatch(addUser(data))
+        alert('Usuario creado con éxito!')
     }
 
     useEffect(() => {
         if (userStore.user?.success === true) {
-            alert("Usuario creado con éxito!")
-            navigate("/", {replace: true})
+            navigate('/', { replace: true })
         }
         if (userStore.user === null) {
-            alert("Error al crear usuario")
-            navigate("/", {replace: true})
+            alert('Error al crear usuario')
         }
     }, [userStore])
 
     return (
         <>
-            <div className="flex flex-col justify-center items-center p-10">
-                <h1 className="text-2xl flex-wrap text-gray-500 text-center max-w-md">
+            <div className="flex flex-col items-center justify-center p-10">
+                <h1 className="max-w-md flex-wrap text-center text-2xl text-gray-500">
                     Crea tu cuenta y alcanza la Ataraxia!
                 </h1>
             </div>
-            <div className="flex flex-col justify-center items-center w-full max-w-md">
-                <form className="p-4 w-full">
+            <div className="flex w-full max-w-md flex-col items-center justify-center">
+                <form className="w-full p-4">
                     <div className="w-full">
                         <label className="text-primary-500" htmlFor="name">
                             Nombre
@@ -58,7 +56,7 @@ function SignupUser() {
                         <input
                             autoComplete="false"
                             type="text"
-                            className="flex flex-col justify-center items-center p-2 w-full border rounded-sm shadow-sm mb-4 no-underline transition-all duration-100 ease-in-out"
+                            className="mb-4 flex w-full flex-col items-center justify-center rounded-sm border p-2 no-underline shadow-sm transition-all duration-100 ease-in-out"
                             id="name"
                             ref={name}
                             key="name"
@@ -71,7 +69,7 @@ function SignupUser() {
                         <input
                             autoComplete="false"
                             type="text"
-                            className="flex flex-col justify-center items-center p-2 w-full border rounded-sm shadow-sm mb-4 no-underline transition-all duration-100 ease-in-out"
+                            className="mb-4 flex w-full flex-col items-center justify-center rounded-sm border p-2 no-underline shadow-sm transition-all duration-100 ease-in-out"
                             id="lastName"
                             ref={lastName}
                             key="lastName"
@@ -84,7 +82,7 @@ function SignupUser() {
                         <input
                             autoComplete="false"
                             type="text"
-                            className="flex flex-col justify-center items-center p-2 w-full border rounded-sm shadow-sm mb-4 no-underline transition-all duration-100 ease-in-out"
+                            className="mb-4 flex w-full flex-col items-center justify-center rounded-sm border p-2 no-underline shadow-sm transition-all duration-100 ease-in-out"
                             id="dni"
                             ref={dni}
                             key="dni"
@@ -97,7 +95,7 @@ function SignupUser() {
                         <input
                             autoComplete="false"
                             type="text"
-                            className="flex flex-col justify-center items-center p-2 w-full border rounded-sm shadow-sm mb-4 no-underline transition-all duration-100 ease-in-out"
+                            className="mb-4 flex w-full flex-col items-center justify-center rounded-sm border p-2 no-underline shadow-sm transition-all duration-100 ease-in-out"
                             id="mail"
                             ref={mail}
                             key="mail"
@@ -110,7 +108,7 @@ function SignupUser() {
                         <input
                             autoComplete="false"
                             type="password"
-                            className="flex flex-col justify-center items-center p-2 w-full border rounded-sm shadow-sm mb-4 no-underline transition-all duration-100 ease-in-out"
+                            className="mb-4 flex w-full flex-col items-center justify-center rounded-sm border p-2 no-underline shadow-sm transition-all duration-100 ease-in-out"
                             id="password"
                             ref={password}
                             key="password"
@@ -118,7 +116,7 @@ function SignupUser() {
                     </div>
                     <div className="flex items-center">
                         <Link
-                            className="flex w-full justify-center no-underline p-3 bg-primary-300 text-white rounded-sm border-none cursor-pointer text-lg font-bold transition-all duration-100 ease-in-out"
+                            className="flex w-full cursor-pointer justify-center rounded-sm border-none bg-primary-300 p-3 text-lg font-bold text-white no-underline transition-all duration-100 ease-in-out"
                             type="submit"
                             onClick={(e) => captureData(e)}
                             to={'/'}

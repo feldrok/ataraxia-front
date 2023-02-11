@@ -25,15 +25,18 @@ function Home() {
     }
 
     return (
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col items-center justify-center">
             <Slider />
-            <div className="flex flex-col justify-center items-center p-2">
+            <div className="flex flex-col items-center justify-center p-2">
                 {storeCategories.categories.response?.map((category) => (
-                    <div className="flex flex-col justify-center items-center">
+                    <div
+                        className="flex flex-col items-center justify-center"
+                        key={category.name}
+                    >
                         <h1 className="p-4 text-2xl font-bold text-tertiary-500">
                             {category.name.toUpperCase()}
                         </h1>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 grid-flow-row-dense">
+                        <div className="grid grid-flow-row-dense grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
                             {filteredProducts(category._id)?.map((product) => (
                                 <ProductCard
                                     key={product._id}

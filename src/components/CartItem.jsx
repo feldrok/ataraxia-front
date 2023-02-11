@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 
 import { ThreeDots } from 'react-loading-icons'
 import cartActions from '../store/carts/actions'
+import { decodeToken } from 'react-jwt'
 import { useDispatch } from 'react-redux'
 
 const { getCart, updateCart, deleteItem } = cartActions
@@ -17,34 +18,53 @@ function CartItem({ product }) {
     }, [product])
 
     const handleUpdate = async (quant) => {
-        let id = '63e40a702798dd1fdd45703a'
+        let token = localStorage.getItem('token')
+        if (token) {
+            token = decodeToken(localStorage.getItem('token')).id
+        }
+        let guestToken = localStorage.getItem('guestToken')
         let productUpdate = {
             product_id: producto._id,
             quantity: quant,
         }
         try {
             setLoading(true)
-            await dispatch(updateCart({ id: id, products: productUpdate }))
-        } catch (error) {
-            console.log(error)
-        } finally {
-            setLoading(false)
-            await dispatch(getCart(id))
-        }
-    }
-
-    const handleDeleteItem = async () => {
-        let id = '63e40a702798dd1fdd45703a'
-        try {
-            setLoading(true)
             await dispatch(
-                deleteItem({ id: id, product_id: { product_id: producto._id } })
+                updateCart({
+                    id: token ? token : guestToken,
+                    product: productUpdate,
+                })
             )
         } catch (error) {
             console.log(error)
         } finally {
             setLoading(false)
-            await dispatch(getCart(id))
+            await dispatch(getCart(token ? token : guestToken))
+        }
+    }
+
+    const handleDeleteItem = async () => {
+        let token = localStorage.getItem('token')
+        if (token) {
+            token = decodeToken(localStorage.getItem('token')).id
+        }
+        let guestToken = localStorage.getItem('guestToken')
+        try {
+            let product = {
+                product_id: producto._id,
+            }
+            setLoading(true)
+            await dispatch(
+                deleteItem({
+                    id: token ? token : guestToken,
+                    product_id: product,
+                })
+            )
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setLoading(false)
+            await dispatch(getCart(token ? token : guestToken))
         }
     }
 
@@ -87,8 +107,9 @@ function CartItem({ product }) {
             </div>
             <div className="flex flex-col justify-evenly p-2">
                 <h1 className="font-bold text-gray-800">{producto?.name}</h1>
-                <p className="text-sm text-gray-600">355ml</p>
-                <p className="text-sm text-gray-600">Botella</p>
+                <p className="text-sm text-gray-600">
+                    {producto?.ml ? `${producto?.ml} ml` : null}
+                </p>
                 <div className="flex rounded-md border bg-gray-100 shadow-md">
                     <button
                         className="hover:bg-gray-300"
@@ -111,6 +132,7 @@ function CartItem({ product }) {
                     <input
                         className="w-10 text-center outline-none"
                         value={quantity}
+                        onChange={(e) => setQuantity(e.target.value)}
                         type="number"
                     />
                     <button className="hover:bg-gray-300" onClick={sumQuantity}>
