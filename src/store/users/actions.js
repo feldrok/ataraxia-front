@@ -17,7 +17,6 @@ const handleToken = () => {
 const addUser = createAsyncThunk('addUser', async (user) => {
     try {
         const response = await axios.post(`${API_URL}/users/signup`, user)
-        console.log(response)
         return {
             user: response.data,
             message: 'Usuario creado con éxito',
@@ -83,7 +82,7 @@ const signInToken = createAsyncThunk('signInToken', async (token) => {
         }
     } catch (error) {
         return {
-            response: { user: error.response.data },
+            user: null,
             message: 'Error al autenticar usuario',
         }
     }
@@ -91,10 +90,31 @@ const signInToken = createAsyncThunk('signInToken', async (token) => {
 
 const signout = createAsyncThunk('signout', async () => {
     try {
-        const response = await axios.get(`${API_URL}/users/signout`, handleToken())
+        const response = await axios.get(
+            `${API_URL}/users/signout`,
+            handleToken()
+        )
         return {
             user: response.data,
             message: 'Se ha cerrado sesión',
+        }
+    } catch (error) {
+        return {
+            user: null,
+            message: error.response.data.response,
+        }
+    }
+})
+
+const getProfile = createAsyncThunk('getProfile', async () => {
+    try {
+        const response = await axios.get(
+            `${API_URL}/users/profile`,
+            handleToken()
+        )
+        return {
+            user: response.data,
+            message: 'Perfil actualizado',
         }
     } catch (error) {
         return {
@@ -109,7 +129,8 @@ const userActions = {
     signIn,
     signInToken,
     verifyUser,
-    signout
+    signout,
+    getProfile
 }
 
 export default userActions

@@ -28,15 +28,11 @@ function SignupUser() {
             password: password.current.value,
         }
         dispatch(addUser(data))
-        alert('Usuario creado con éxito!')
     }
 
     useEffect(() => {
         if (userStore.user?.success === true) {
             navigate('/', { replace: true })
-        }
-        if (userStore.user === null) {
-            alert('Error al crear usuario')
         }
     }, [userStore])
 

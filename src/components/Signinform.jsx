@@ -15,9 +15,6 @@ function Signin() {
     let inputPassword = useRef('')
 
     useEffect(() => {
-        if (userStore.user === null) {
-            alert(userStore.message)
-        }
         if (userStore.user?.success === true) {
             navigate('/')
         }
