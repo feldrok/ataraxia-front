@@ -1,10 +1,11 @@
-import Footer from './Footer'
-import Nav from './Nav'
 import { Outlet, useLocation } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import userActions from '../store/users/actions'
+
+import Footer from './Footer'
+import Nav from './Nav'
 import cryptoRandomString from 'crypto-random-string'
+import userActions from '../store/users/actions'
 
 const { signInToken } = userActions
 
@@ -21,6 +22,11 @@ function Layout() {
             setIsLogged(true)
         } else {
             setIsLogged(false)
+            let guestToken = localStorage.getItem('guestToken')
+            if (!guestToken) {
+                let generateToken = cryptoRandomString({ length: 24 })
+                localStorage.setItem('guestToken', generateToken)
+            }
         }
     }, [location, storeUser.user?.success])
 

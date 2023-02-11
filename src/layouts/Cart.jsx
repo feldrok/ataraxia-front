@@ -4,17 +4,24 @@ import { useDispatch, useSelector } from 'react-redux'
 import CartItem from '../components/CartItem'
 import { Link } from 'react-router-dom'
 import cartActions from '../store/carts/actions'
+import { decodeToken } from 'react-jwt'
 
 const { getCart } = cartActions
 
 function Cart({ handleOnClick, isOpen }) {
     const storeCart = useSelector((store) => store.cart)
+    const storeUser = useSelector((store) => store.user)
     const dispatch = useDispatch()
     const products = storeCart.cart.cart?.response[0]?.products
 
     useEffect(() => {
-        dispatch(getCart('63e40a702798dd1fdd45703a'))
-    }, [])
+        let token = localStorage.getItem('token')
+        if (token) {
+            token = decodeToken(localStorage.getItem('token')).id
+        }
+        let guestToken = localStorage.getItem('guestToken')
+        dispatch(getCart(token ? token : guestToken))
+    }, [storeUser])
 
     return (
         <>

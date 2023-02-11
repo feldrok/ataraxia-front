@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 
 import { ThreeDots } from 'react-loading-icons'
 import cartActions from '../store/carts/actions'
+import { decodeToken } from 'react-jwt'
 import { useDispatch } from 'react-redux'
 
 const { getCart, updateCart, deleteItem } = cartActions
@@ -17,33 +18,53 @@ function CartItem({ product }) {
     }, [product])
 
     const handleUpdate = async (quant) => {
+        let token = localStorage.getItem('token')
+        if (token) {
+            token = decodeToken(localStorage.getItem('token')).id
+        }
+        let guestToken = localStorage.getItem('guestToken')
         let productUpdate = {
             product_id: producto._id,
             quantity: quant,
         }
         try {
             setLoading(true)
-            await dispatch(updateCart(productUpdate))
+            await dispatch(
+                updateCart({
+                    id: token ? token : guestToken,
+                    product: productUpdate,
+                })
+            )
         } catch (error) {
             console.log(error)
         } finally {
             setLoading(false)
-            await dispatch(getCart())
+            await dispatch(getCart(token ? token : guestToken))
         }
     }
 
     const handleDeleteItem = async () => {
+        let token = localStorage.getItem('token')
+        if (token) {
+            token = decodeToken(localStorage.getItem('token')).id
+        }
+        let guestToken = localStorage.getItem('guestToken')
         try {
             let product = {
                 product_id: producto._id,
             }
             setLoading(true)
-            await dispatch(deleteItem(product))
+            await dispatch(
+                deleteItem({
+                    id: token ? token : guestToken,
+                    product_id: product,
+                })
+            )
         } catch (error) {
             console.log(error)
         } finally {
             setLoading(false)
-            await dispatch(getCart())
+            await dispatch(getCart(token ? token : guestToken))
         }
     }
 
