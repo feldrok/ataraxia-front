@@ -35,7 +35,6 @@ function UserCheckoutForm({ session }) {
         <form className="m-2 flex w-full flex-col justify-center rounded-sm text-gray-600 shadow-md">
             {hasAddresses ? (
                 <div className="h-full bg-gray-100 p-6">
-                    <h1></h1>
                     <Address />
                 </div>
             ) : (

@@ -3,15 +3,16 @@ import React, { useState } from 'react'
 import { CheckIcon } from '@heroicons/react/solid'
 import { RadioGroup } from '@headlessui/react'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
-function Address() {
+function Address({cart}) {
     const storeAddress = useSelector((state) => state.address)
     const [activeAddress, setActiveAddress] = useState(
         storeAddress.addresses?.response[0]?._id
     )
 
     return (
-        <div className="flex w-full justify-center p-4">
+        <div className="flex flex-col w-full justify-center p-4">
             <RadioGroup
                 value={activeAddress}
                 onChange={setActiveAddress}
@@ -25,10 +26,9 @@ function Address() {
                 {storeAddress.addresses?.response?.map((address) => (
                     <RadioGroup.Option
                         className={({ checked }) => `
-                            ${
-                                checked
-                                    ? 'bg-tertiary-500 text-white shadow-none'
-                                    : 'bg-white text-black shadow-md'
+                            ${checked
+                                ? 'bg-tertiary-500 text-white shadow-none'
+                                : 'bg-white text-black shadow-md'
                             }
                             relative my-2 flex cursor-pointer select-none rounded-md border px-16 py-4`}
                         key={address._id}
@@ -47,6 +47,12 @@ function Address() {
                     </RadioGroup.Option>
                 ))}
             </RadioGroup>
+            <Link
+                className="rounded-md self-center bg-tertiary-500 mt-10 p-4 font-medium text-white duration-300 hover:bg-tertiary-400"
+                to={`/billing-detail/${activeAddress}`}
+            >
+                Continuar
+            </Link>
         </div>
     )
 }
