@@ -1,10 +1,11 @@
 import { createReducer } from '@reduxjs/toolkit'
 import userActions from './actions'
 
-const { signIn, signInToken, addUser, verifyUser, signout } = userActions
+const { signIn, signInToken, addUser, verifyUser, signout, getProfile } = userActions
 
 const initialState = {
     user: [],
+    profile: {},
     message: '',
 }
 
@@ -13,6 +14,7 @@ const userReducer = createReducer(initialState, (builder) => {
         .addCase(signIn.fulfilled, (state, action) => {
             let newState = {
                 user: action.payload.user,
+                profile: state.profile,
                 message: action.payload.message,
             }
             return newState
@@ -26,6 +28,7 @@ const userReducer = createReducer(initialState, (builder) => {
         .addCase(signInToken.fulfilled, (state, action) => {
             let newState = {
                 user: action.payload.user,
+                profile: state.profile,
                 message: action.payload.message,
             }
             return newState
@@ -39,6 +42,7 @@ const userReducer = createReducer(initialState, (builder) => {
         .addCase(addUser.fulfilled, (state, action) => {
             let newState = {
                 user: action.payload.user,
+                profile: state.profile,
                 message: action.payload.message,
             }
             return newState
@@ -65,6 +69,14 @@ const userReducer = createReducer(initialState, (builder) => {
             let newState = {
                 user: [],
                 message: 'Sesión cerrada correctamente',
+            }
+            return newState
+        })
+        .addCase(getProfile.fulfilled, (state, action) => {
+            let newState = {
+                profile: action.payload.user,
+                user: state.user,
+                message: action.payload.message,
             }
             return newState
         })

@@ -1,7 +1,23 @@
-import { Link } from 'react-router-dom'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-function Drawer({ handleOnClick, isOpen, routes, protectedRoutes }) {
+import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+
+function Drawer({
+    handleOnClick,
+    isOpen,
+    routes,
+    protectedRoutes,
+    session,
+    handleLogout,
+}) {
+    const storeUser = useSelector((store) => store.user)
+    const [isLogged, setIsLogged] = useState(session)
+
+    useEffect(() => {
+        setIsLogged(session)
+    }, [storeUser, session])
+
     return (
         <>
             <nav
@@ -26,7 +42,9 @@ function Drawer({ handleOnClick, isOpen, routes, protectedRoutes }) {
                             />
                         </svg>
                     </div>
-                    <div className="flex w-full">
+                </div>
+                <div className="flex h-screen flex-col justify-between">
+                    <div className="flex w-full flex-col">
                         <ul className="flex w-full flex-col p-2">
                             {routes.map((route) => (
                                 <li className="flex w-full" key={route.path}>
@@ -39,9 +57,52 @@ function Drawer({ handleOnClick, isOpen, routes, protectedRoutes }) {
                                 </li>
                             ))}
                         </ul>
+                        <ul className="flex w-full flex-col p-2">
+                            {isLogged
+                                ? protectedRoutes.map((route) => (
+                                      <li
+                                          className="flex w-full"
+                                          key={route.path}
+                                      >
+                                          <Link
+                                              className="w-full rounded-md p-2 font-medium text-primary-500 duration-300 hover:bg-primary-500 hover:text-white"
+                                              to={route.path}
+                                          >
+                                              {route.name}
+                                          </Link>
+                                      </li>
+                                  ))
+                                : null}
+                        </ul>
+                    </div>
+                    <div className="flex w-full flex-col pb-24">
+                        {isLogged ? (
+                            <div className="flex flex-col gap-4 p-2">
+                                <button
+                                    className="w-full rounded-md border-2 border-primary-500 p-2 font-medium text-primary-500 duration-300 hover:bg-primary-500 hover:text-white"
+                                    onClick={handleLogout}
+                                >
+                                    Cerrar Sesión
+                                </button>
+                            </div>
+                        ) : (
+                            <div className="flex flex-col gap-4 p-2">
+                                <Link
+                                    className="w-full rounded-md border-2 border-primary-500 p-2 text-center font-medium text-primary-500 duration-300 hover:bg-primary-500 hover:text-white"
+                                    to="/signin"
+                                >
+                                    Iniciar Sesión
+                                </Link>
+                                <Link
+                                    className="w-full rounded-md border-2 border-primary-500 p-2 text-center font-medium text-primary-500 duration-300 hover:bg-primary-500 hover:text-white"
+                                    to="/signup"
+                                >
+                                    Registrarse
+                                </Link>
+                            </div>
+                        )}
                     </div>
                 </div>
-                <div className=""></div>
             </nav>
             <div
                 className={`backdrop-brightness-70 fixed left-0 top-0 z-20 min-h-screen backdrop-blur-sm backdrop-filter duration-150 ${

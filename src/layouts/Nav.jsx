@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 import Cart from './Cart'
 import Drawer from './Drawer'
 import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 import userActions from '../store/users/actions'
 
 const { signout } = userActions
@@ -118,6 +118,8 @@ function Nav({ session }) {
                     protectedRoutes={protectedRoutes}
                     handleOnClick={toggleDrawer}
                     isOpen={isOpen}
+                    session={isLogged}
+                    handleLogout={handleLogout}
                 />
                 <Cart handleOnClick={toggleCartOpen} isOpen={isCartOpen} />
             </nav>
