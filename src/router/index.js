@@ -47,13 +47,12 @@ const indexRouter = createBrowserRouter([
                     },
                 ],
             },
+            {
+                path: '/checkout',
+                element: <Checkout />,
+            },
         ],
     },
-    {
-        path: '/checkout/:id',
-        element: <Checkout />,
-    },
-
     {
         path: '/verify/:user_id/:verify_code',
         element: <VerifyAccount />,

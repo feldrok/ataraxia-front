@@ -63,7 +63,7 @@ function Cart({ handleOnClick, isOpen }) {
                             </p>
                         </div>
                         <Link
-                            to={'/checkout/63e40a702798dd1fdd45703a'}
+                            to={'/checkout'}
                             className="rounded-sm border-2 border-primary-500 bg-white p-4 text-center font-bold uppercase text-primary-500 duration-300 hover:bg-primary-500 hover:text-white"
                         >
                             Proceder al pago

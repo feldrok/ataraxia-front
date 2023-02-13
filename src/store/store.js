@@ -1,3 +1,4 @@
+import addressReducer from './address/reducers'
 import cartReducer from './carts/reducers'
 import categoryReducer from './categories/reducers'
 import { configureStore } from '@reduxjs/toolkit'
@@ -12,6 +13,7 @@ const store = configureStore({
         cart: cartReducer,
         user: userReducer,
         orders: orderReducer,
+        address: addressReducer,
     },
 })
 
