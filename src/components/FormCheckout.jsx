@@ -124,9 +124,8 @@ const FormCheckout = () => {
                     <UserCheckoutForm session={isLogged} />
                 </div>
                 <OrderDetails
-                    user={storeCart.cart.cart?.response[0].user_id}
-                    items={storeCart.cart.cart?.response[0].products}
-                    price={storeCart.cart.cart?.response[0].total_price}
+                    items={storeCart.cart.cart?.response[0]?.products}
+                    price={storeCart.cart.cart?.response[0]?.total_price}
                 />
             </div>
         </>
