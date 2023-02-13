@@ -32,15 +32,17 @@ function OrderDetails({ items, price }) {
             <div className="flex w-full flex-col justify-center border-t-2 border-gray-300 md:justify-end">
                 <div className="flex w-full justify-end gap-2 px-4 text-lg text-gray-500">
                     <p className="text-lg">Subtotal: </p>
-                    <p>${price}</p>
+                    <p>${price !== undefined ? price : 0}</p>
                 </div>
                 <div className="flex w-full justify-end gap-2 px-4 text-lg text-gray-500">
                     <p className="text-lg">IVA: </p>
-                    <p>${price * 0.19}</p>
+                    <p>${price !== undefined ? price * 0.19 : 0}</p>
                 </div>
                 <div className="flex w-full items-center justify-end gap-2 p-4 text-gray-800">
                     <p className="text-lg">Total: </p>
-                    <p className="text-3xl">${price * 1.19}</p>
+                    <p className="text-3xl">
+                        ${price !== undefined ? price * 1.19 : 0}
+                    </p>
                 </div>
             </div>
         </div>
