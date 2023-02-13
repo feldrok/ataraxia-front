@@ -1,12 +1,12 @@
 import CartItem from './CartItem'
 import React from 'react'
 
-function OrderDetails({ user, items, price }) {
+function OrderDetails({ items, price }) {
     return (
         <div className="m-2 grid rounded-sm bg-gray-100 shadow-md md:order-2">
             <div className="w-100 h-80 overflow-y-auto border-b-2 border-gray-300 py-10">
-                {items.map((item) => (
-                    <CartItem key={item.id} product={item} />
+                {items?.map((item) => (
+                    <CartItem key={item._id} product={item} />
                 ))}
             </div>
             <div className="flex flex-col items-center justify-center gap-4 border-b-2 border-gray-300 py-6 text-gray-600">
