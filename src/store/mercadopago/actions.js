@@ -19,7 +19,7 @@ const createOrderMp = createAsyncThunk('orderMp/CreateOrders', async (cart) => {
         const response = await axios.post(`${API_URL}/payment`, cart, 
         handleToken())
         return {
-            ordersMp: response.data,
+            ordersMp: window.location.href = response.data.response.body.init_point,
             message: response.data.message,
         }
     } catch (error) {
