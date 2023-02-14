@@ -26,6 +26,7 @@ const createAddress = createAsyncThunk('user/createAddress', async (data) => {
             message: 'Dirección creada correctamente',
         }
     } catch (error) {
+        console.log(error)
         return {
             address: null,
             message: error.message,
