@@ -1,29 +1,31 @@
 import React, { useState } from 'react'
 
 import { CheckIcon } from '@heroicons/react/solid'
+import { Link } from 'react-router-dom'
 import { RadioGroup } from '@headlessui/react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 
-function Address({cart}) {
+function Address({ cart }) {
     const storeAddress = useSelector((state) => state.address)
     const addressess = storeAddress.addresses?.response
     const [activeAddress, setActiveAddress] = useState(addressess[0]?._id)
 
     return (
-        <div className="flex w-full justify-center p-4">
-            <RadioGroup value={activeAddress} onChange={setActiveAddress}>
-                <RadioGroup.Label className="text-2xl text-tertiary-500">
-                    Tus direcciones
-                </RadioGroup.Label>
+        <div className="flex w-full flex-col items-center justify-center p-4">
+            <RadioGroup
+                className="flex flex-col flex-wrap items-center justify-center gap-2 md:flex-row"
+                value={activeAddress}
+                onChange={setActiveAddress}
+            >
                 {storeAddress.addresses?.response?.map((address) => (
                     <RadioGroup.Option
                         className={({ checked }) => `
-                            ${checked
-                                ? 'bg-tertiary-500 text-white shadow-none'
-                                : 'bg-white text-black shadow-md'
+                            ${
+                                checked
+                                    ? 'bg-tertiary-500 text-white shadow-none'
+                                    : 'bg-white text-black shadow-md'
                             }
-                            relative my-2 flex cursor-pointer select-none rounded-md border px-16 py-4`}
+                            relative my-2 flex h-40 w-60 max-w-xs cursor-pointer select-none items-center rounded-md border px-16 py-4`}
                         key={address._id}
                         value={address._id}
                         checked={address._id === activeAddress}
@@ -41,7 +43,7 @@ function Address({cart}) {
                 ))}
             </RadioGroup>
             <Link
-                className="rounded-md self-center bg-tertiary-500 mt-10 p-4 font-medium text-white duration-300 hover:bg-tertiary-400"
+                className="mt-10 self-center rounded-md bg-tertiary-500 p-4 font-medium text-white duration-300 hover:bg-tertiary-400"
                 to={`/billing-detail/${activeAddress}`}
             >
                 Continuar
