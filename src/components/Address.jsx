@@ -7,19 +7,12 @@ import { Link } from 'react-router-dom'
 
 function Address({cart}) {
     const storeAddress = useSelector((state) => state.address)
-    const [activeAddress, setActiveAddress] = useState(
-        storeAddress.addresses?.response[0]?._id
-    )
+    const addressess = storeAddress.addresses?.response
+    const [activeAddress, setActiveAddress] = useState(addressess[0]?._id)
 
     return (
-        <div className="flex flex-col w-full justify-center p-4">
-            <RadioGroup
-                value={activeAddress}
-                onChange={setActiveAddress}
-                defaultChecked={
-                    activeAddress === storeAddress.addresses?.response[0]?._id
-                }
-            >
+        <div className="flex w-full justify-center p-4">
+            <RadioGroup value={activeAddress} onChange={setActiveAddress}>
                 <RadioGroup.Label className="text-2xl text-tertiary-500">
                     Tus direcciones
                 </RadioGroup.Label>
