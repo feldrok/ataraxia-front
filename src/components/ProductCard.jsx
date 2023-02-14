@@ -47,7 +47,7 @@ function ProductCard({
                         <Link to={`/product/${id}`}>
                             <img src={image[0]} alt="" />
                             <img
-                                className="absolute top-0 duration-300 hover:scale-125"
+                                className="absolute top-0 duration-300 hover:-translate-y-5 hover:scale-125"
                                 src={image[1]}
                                 alt=""
                             />
@@ -90,6 +90,11 @@ function ProductCard({
                     <div className="relative rounded-sm">
                         <Link to={`/product/${id}`}>
                             <img src={image[0]} alt="" />
+                            <img
+                                className="absolute top-0 duration-300 hover:-translate-y-6 hover:scale-125"
+                                src={image[1]}
+                                alt=""
+                            />
                         </Link>
                     </div>
                     <div className="p-2">
