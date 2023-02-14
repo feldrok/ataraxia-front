@@ -10,6 +10,7 @@ const { getUserAddresses } = addresActions
 function UserCheckoutForm({ session }) {
     const [isLogged, setIsLogged] = useState(session)
     const [hasAddresses, setHasAddresses] = useState(false)
+    const storeUser = useSelector((state) => state.user)
     const storeAddress = useSelector((state) => state.address)
     const dispatch = useDispatch()
 
@@ -20,8 +21,10 @@ function UserCheckoutForm({ session }) {
     useEffect(() => {
         if (isLogged === true) {
             dispatch(getUserAddresses())
+        } else {
+            setIsLogged(false)
         }
-    }, [isLogged])
+    }, [storeUser])
 
     useEffect(() => {
         if (storeAddress.addresses?.response?.length > 0) {
