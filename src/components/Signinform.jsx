@@ -2,23 +2,31 @@ import { Link, useNavigate } from 'react-router-dom'
 import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { toast } from 'react-hot-toast'
 import userActions from '../store/users/actions'
 
 const { signIn } = userActions
 
 function Signin() {
-    const userStore = useSelector((state) => state.user)
-    console.log(userStore)
+    const storeUser = useSelector((state) => state.user)
+    console.log(storeUser)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     let inputMail = useRef('')
     let inputPassword = useRef('')
 
     useEffect(() => {
-        if (userStore.user?.success === true) {
+        if (storeUser.message === 'Logueado con éxito') {
+            toast.success(storeUser.message)
             navigate('/')
         }
-    }, [userStore])
+        if (storeUser.message === 'Contraseña incorrecta') {
+            toast.error(storeUser.message)
+        }
+        if (storeUser.message === 'Email incorrecto') {
+            toast.error(storeUser.message)
+        }
+    }, [storeUser])
 
     const handleSignIn = async (e) => {
         e.preventDefault()

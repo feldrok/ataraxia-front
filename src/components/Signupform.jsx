@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { computeHeadingLevel } from '@testing-library/react'
+import { toast } from 'react-hot-toast'
 import userActions from '../store/users/actions'
 
 const { addUser } = userActions
@@ -16,6 +17,7 @@ function SignupUser() {
     const dni = useRef('')
     const mail = useRef('')
     const password = useRef('')
+    const verify_password = useRef('')
     const navigate = useNavigate()
 
     const captureData = async (e) => {
@@ -26,13 +28,25 @@ function SignupUser() {
             dni: dni.current.value,
             mail: mail.current.value,
             password: password.current.value,
+            verify_password: verify_password.current.value,
         }
         dispatch(addUser(data))
     }
 
     useEffect(() => {
-        if (userStore.user?.success === true) {
+        if (userStore.message === 'Usuario creado con éxito') {
+            toast.success(userStore.message)
             navigate('/', { replace: true })
+        }
+        if (
+            userStore.message?.data?.response === 'Las contraseñas no coinciden'
+        ) {
+            toast.error(userStore.message?.data?.response)
+        }
+        if (userStore.message?.data?.response?.length > 0) {
+            userStore.message?.data?.response?.map((error) => {
+                toast.error(error.message)
+            })
         }
     }, [userStore])
 
@@ -56,6 +70,7 @@ function SignupUser() {
                             id="name"
                             ref={name}
                             key="name"
+                            required
                         />
                     </div>
                     <div className="w-full">
@@ -69,6 +84,7 @@ function SignupUser() {
                             id="lastName"
                             ref={lastName}
                             key="lastName"
+                            required
                         />
                     </div>
                     <div className="w-full">
@@ -82,6 +98,7 @@ function SignupUser() {
                             id="dni"
                             ref={dni}
                             key="dni"
+                            required
                         />
                     </div>
                     <div className="w-full">
@@ -95,6 +112,7 @@ function SignupUser() {
                             id="mail"
                             ref={mail}
                             key="mail"
+                            required
                         />
                     </div>
                     <div className="w-full">
@@ -108,6 +126,24 @@ function SignupUser() {
                             id="password"
                             ref={password}
                             key="password"
+                            required
+                        />
+                    </div>
+                    <div className="w-full">
+                        <label
+                            className="text-primary-500"
+                            htmlFor="verify_password"
+                        >
+                            Repetir contraseña
+                        </label>
+                        <input
+                            autoComplete="false"
+                            type="password"
+                            className="mb-4 flex w-full flex-col items-center justify-center rounded-sm border p-2 no-underline shadow-sm transition-all duration-100 ease-in-out"
+                            id="verify_password"
+                            ref={verify_password}
+                            key="verify_password"
+                            required
                         />
                     </div>
                     <div className="flex items-center">

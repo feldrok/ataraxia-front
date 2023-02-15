@@ -25,7 +25,7 @@ const createCart = createAsyncThunk('cart/createCart', async ({ id, data }) => {
         )
         return {
             cart: response.data,
-            message: 'Cart created successfully',
+            message: 'Carro creado satisfactoriamente',
         }
     } catch (error) {
         console.log(error)
@@ -41,7 +41,7 @@ const getCart = createAsyncThunk('cart/getCart', async (id) => {
         const response = await axios.get(`${API_URL}/cart/${id}`, handleToken())
         return {
             cart: response.data,
-            message: 'Cart fetched successfully',
+            message: 'Carro cargado satisfactoriamente',
         }
     } catch (error) {
         return {
@@ -60,10 +60,9 @@ const addProductToCart = createAsyncThunk(
                 product,
                 handleToken()
             )
-            console.log(response)
             return {
                 cart: response.data,
-                message: 'Product added to cart successfully',
+                message: 'Producto agregado al carro',
             }
         } catch (error) {
             console.log(error)

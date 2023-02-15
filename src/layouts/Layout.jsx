@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import Footer from './Footer'
 import Nav from './Nav'
+import { Toaster } from 'react-hot-toast'
 import cryptoRandomString from 'crypto-random-string'
 import userActions from '../store/users/actions'
 
@@ -28,11 +29,13 @@ function Layout() {
                 localStorage.setItem('guestToken', generateToken)
             }
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [location, storeUser.user?.success])
 
     return (
         <>
             <Nav session={isLogged} />
+            <Toaster />
             <div className="pt-20">
                 <Outlet />
             </div>
