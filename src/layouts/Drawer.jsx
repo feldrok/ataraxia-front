@@ -57,7 +57,7 @@ function Drawer({
                                 </li>
                             ))}
                         </ul>
-                        <ul className="flex w-full flex-col p-2">
+                        <ul className="flex w-full flex-col gap-4 p-2">
                             {isLogged
                                 ? protectedRoutes.map((route) => (
                                       <li
@@ -73,6 +73,17 @@ function Drawer({
                                       </li>
                                   ))
                                 : null}
+                            {isLogged &&
+                            storeUser.user?.response?.user.is_admin ? (
+                                <li className="flex w-full">
+                                    <Link
+                                        className="w-full rounded-md p-2 font-medium text-primary-500 duration-300 hover:bg-primary-500 hover:text-white"
+                                        to="/admin"
+                                    >
+                                        Panel de administración
+                                    </Link>
+                                </li>
+                            ) : null}
                         </ul>
                     </div>
                     <div className="flex w-full flex-col pb-24">
