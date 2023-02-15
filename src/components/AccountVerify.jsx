@@ -4,11 +4,13 @@ import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import userActions from '../store/users/actions'
 
+const { verifyUser } = userActions
+
 const VerifyAccount = () => {
     const { user_id, verify_code } = useParams()
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(userActions.verifyUser({ user_id, verify_code }))
+        dispatch(verifyUser({ user_id, verify_code }))
     }, [])
     return (
         <div className="background-container h-screen w-screen bg-[url('/public/banner1.jpg')] bg-cover bg-top bg-no-repeat">

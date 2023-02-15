@@ -44,7 +44,7 @@ const verifyUser = createAsyncThunk(
             }
         } catch (error) {
             return {
-                message: 'Error al crear usuario!',
+                message: 'Error al verificar usuario!',
             }
         }
     }
