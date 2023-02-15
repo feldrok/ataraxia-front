@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 
 import React from 'react'
 import orderActions from '../../store/orders/actions.js'
+import { toast } from 'react-hot-toast'
 
 const { orderUpdate, getOrders } = orderActions
 
@@ -26,12 +27,26 @@ export default function Orders() {
     }, [])
 
     useEffect(() => {
-        dispatch(orderUpdate({ id: currentOrder, status: { status: status } }))
+        if (currentOrder) {
+            toast.promise(
+                dispatch(
+                    orderUpdate({
+                        id: currentOrder,
+                        status: { status: status },
+                    })
+                ),
+                {
+                    loading: 'Actualizando estado...',
+                    success: 'Estado actualizado correctamente',
+                    error: 'Error al actualizar estado',
+                }
+            )
+        }
     }, [status])
 
     console.log(storeOrders)
     return (
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex h-[800px] flex-col items-center justify-start">
             <h1 class="text-3xl font-bold text-primary-500">Orders</h1>
             <div class="m-2 flex max-w-2xl flex-col items-center rounded-md bg-gray-100 p-4">
                 <div>
