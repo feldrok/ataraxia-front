@@ -24,7 +24,7 @@ const addUser = createAsyncThunk('addUser', async (user) => {
     } catch (error) {
         return {
             user: null,
-            message: error.message,
+            message: error.response,
         }
     }
 })
@@ -130,7 +130,7 @@ const userActions = {
     signInToken,
     verifyUser,
     signout,
-    getProfile
+    getProfile,
 }
 
 export default userActions

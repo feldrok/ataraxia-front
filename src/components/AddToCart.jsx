@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import cartActions from '../store/carts/actions'
 import { decodeToken } from 'react-jwt'
+import { toast } from 'react-hot-toast'
 
 const { getCart, addProductToCart, createCart } = cartActions
 
@@ -21,7 +22,7 @@ export const AddToCart = ({ stock, bgColor, bgHoverColor, id }) => {
         try {
             setLoading(true)
             if (quantity === 0) {
-                alert('No hay stock')
+                toast.error('No hay stock, intenta más tarde')
             } else {
                 let product = {
                     product_id: id,
@@ -35,11 +36,18 @@ export const AddToCart = ({ stock, bgColor, bgHoverColor, id }) => {
                         })
                     )
                 } else {
-                    await dispatch(
-                        addProductToCart({
-                            id: token ? token : guestToken,
-                            product: product,
-                        })
+                    await toast.promise(
+                        dispatch(
+                            addProductToCart({
+                                id: token ? token : guestToken,
+                                product: product,
+                            })
+                        ),
+                        {
+                            loading: 'Cargando producto',
+                            success: 'Producto agregado al carro',
+                            error: 'Error al agregar el producto al carro',
+                        }
                     )
                 }
             }
