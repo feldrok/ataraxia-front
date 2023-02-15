@@ -31,7 +31,7 @@ function Cart({ handleOnClick, isOpen }) {
                 }`}
             >
                 <div className="flex h-screen w-full flex-col justify-between">
-                    <div className="flex w-full flex-col">
+                    <div className="flex h-full w-full flex-col">
                         <div className="flex w-full justify-start p-2">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -48,13 +48,13 @@ function Cart({ handleOnClick, isOpen }) {
                                 />
                             </svg>
                         </div>
-                        <div className="flex w-full flex-col justify-center p-2">
+                        <div className="h-[80%] w-full flex-col justify-center overflow-y-auto">
                             {products?.map((product) => (
                                 <CartItem key={product._id} product={product} />
                             ))}
                         </div>
                     </div>
-                    <div className="flex w-full flex-col justify-center p-4">
+                    <div className="absolute bottom-0 flex h-[15%] w-full flex-col justify-center bg-white p-4">
                         <div className="flex justify-between p-2">
                             <h2 className="font-bold">Total</h2>
                             <p className="font-light">
