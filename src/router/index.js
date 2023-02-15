@@ -1,3 +1,4 @@
+import BillingDetail from '../components/BillingDetail'
 import Checkout from '../pages/Checkout/Checkout'
 import Home from '../pages/Home/Home'
 import Layout from '../layouts/Layout'
@@ -9,7 +10,6 @@ import Signup from '../pages/Signup/Signup'
 import Signupform from '../components/Signupform'
 import VerifyAccount from '../components/AccountVerify'
 import { createBrowserRouter } from 'react-router-dom'
-import BillingDetail from '../components/BillingDetail'
 
 const indexRouter = createBrowserRouter([
     {
@@ -58,10 +58,6 @@ const indexRouter = createBrowserRouter([
         path: '/verify/:user_id/:verify_code',
         element: <VerifyAccount />,
     },
-    {
-        path: '/billing-detail/:id',
-        element: <BillingDetail /> 
-    }
 ])
 
 export default indexRouter

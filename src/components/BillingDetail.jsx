@@ -1,11 +1,11 @@
-import React, { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import userActions from "../store/users/actions"
-import addressActions from "../store/address/actions"
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
+import addressActions from '../store/address/actions'
 import cartActions from '../store/carts/actions'
-import mpActions from "../store/mercadopago/actions"
 import { decodeToken } from 'react-jwt'
-import { useParams } from "react-router"
+import mpActions from '../store/mercadopago/actions'
+import userActions from '../store/users/actions'
 
 const { getProfile } = userActions
 const { getAddress } = addressActions
@@ -13,18 +13,14 @@ const { getCart } = cartActions
 const { createOrderMp } = mpActions
 
 const BillingDetail = () => {
-
     const storeUser = useSelector((store) => store.user)
     const storeAddress = useSelector((store) => store.address)
     const storeCart = useSelector((store) => store.cart)
     const dispatch = useDispatch()
-    const param = useParams()
-
-    const { id } = param
 
     useEffect(() => {
         dispatch(getProfile())
-        dispatch(getAddress(id))
+        dispatch(getAddress(storeAddress.address.response._id))
         let token = localStorage.getItem('token')
         if (token) {
             token = decodeToken(localStorage.getItem('token')).id
@@ -33,15 +29,15 @@ const BillingDetail = () => {
         dispatch(getCart(token ? token : guestToken))
     }, [])
 
-    const user = storeUser.profile.response
-    const address = storeAddress.address.response
+    const user = storeUser.profile?.response
+    const address = storeAddress.address?.response
 
     const orderMp = () => {
         dispatch(createOrderMp(storeCart))
     }
 
     return (
-        <div className="flex w-full h-screen flex-col items-center justify-center">
+        <div className="flex w-full flex-col items-center justify-center bg-gray-100 p-4">
             <table className="w-3/4 border-collapse border-gray-300">
                 <thead className="border-2 bg-gray-100 text-lg">
                     <tr>

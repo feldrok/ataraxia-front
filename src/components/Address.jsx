@@ -1,14 +1,22 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { CheckIcon } from '@heroicons/react/solid'
 import { Link } from 'react-router-dom'
 import { RadioGroup } from '@headlessui/react'
-import { useSelector } from 'react-redux'
+import addressActions from '../store/address/actions'
+
+const { getAddress } = addressActions
 
 function Address({ cart }) {
     const storeAddress = useSelector((state) => state.address)
     const addressess = storeAddress.addresses?.response
     const [activeAddress, setActiveAddress] = useState(addressess[0]?._id)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getAddress(activeAddress))
+    }, [activeAddress])
 
     return (
         <div className="flex w-full flex-col items-center justify-center p-4">
@@ -42,12 +50,6 @@ function Address({ cart }) {
                     </RadioGroup.Option>
                 ))}
             </RadioGroup>
-            <Link
-                className="mt-10 self-center rounded-md bg-tertiary-500 p-4 font-medium text-white duration-300 hover:bg-tertiary-400"
-                to={`/billing-detail/${activeAddress}`}
-            >
-                Continuar
-            </Link>
         </div>
     )
 }

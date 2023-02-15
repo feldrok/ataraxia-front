@@ -18,7 +18,10 @@ const FormCheckout = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        if (storeUser.message === 'Usuario autenticado') {
+        if (
+            storeUser.message === 'Usuario autenticado' ||
+            storeUser.message === 'Perfil actualizado'
+        ) {
             setIsLogged(true)
         } else {
             setIsLogged(false)
@@ -30,10 +33,6 @@ const FormCheckout = () => {
         let guestToken = localStorage.getItem('guestToken')
         dispatch(getCart(token ? token : guestToken))
     }, [storeUser])
-
-    const createOrder = () => {
-        dispatch(createOrderMp(storeCart))
-    }
 
     return (
         <>
