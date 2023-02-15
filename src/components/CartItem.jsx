@@ -179,7 +179,9 @@ function CartItem({ product }) {
                 </div>
             </div>
         </div>
-    )
-}
+            
+        )}
+    
+
 
 export default CartItem

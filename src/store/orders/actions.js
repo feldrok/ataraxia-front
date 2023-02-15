@@ -29,8 +29,49 @@ const getUserOrders = createAsyncThunk('orders/getUserOrders', async () => {
     }
 })
 
+const orderUpdate = createAsyncThunk('updateOrder', async ({ id, status }) => {
+    try {
+        const response = await axios.put(
+            `${API_URL}/checkout/order/${id}`,
+            status,
+            handleToken()
+        )
+        return {
+            order: response.data,
+            message: response.data.message,
+        }
+    } catch (error) {
+        return {
+            order: null,
+            message: error.response.data.message,
+        }
+    }
+})
+
+const getOrders = createAsyncThunk('getOrders', async () => {
+    try {
+        const response = await axios.get(
+            `${API_URL}/checkout/all`,
+            handleToken()
+        )
+        console.log(response)
+        return {
+            orders: response.data,
+            message: response.data.message,
+        }
+    } catch (error) {
+        console.log(error)
+        return {
+            orders: null,
+            message: error.response.data.message,
+        }
+    }
+})
+
 const orderActions = {
     getUserOrders,
+    orderUpdate,
+    getOrders,
 }
 
 export default orderActions
