@@ -1,23 +1,20 @@
 import { Link, Outlet } from 'react-router-dom'
 
-import Nav from '../../layouts/Nav'
 import React from 'react'
 
 function Signup() {
     return (
         <>
-            <Nav />
-
-            <div className="flex relative h-screen">
-                <div className="flex flex-col justify-center items-center bg-white w-full h-full lg:w-1/2">
-                    <div className="flex flex-col justify-center items-center w-full">
+            <div className="relative flex h-screen">
+                <div className="flex h-full w-full flex-col items-center justify-center bg-white lg:w-1/2">
+                    <div className="flex w-full flex-col items-center justify-center">
                         <Outlet />
                     </div>
-                    <div className="flex flex-col justify-center items-center p-4 gap-2">
+                    <div className="flex flex-col items-center justify-center gap-2 p-4">
                         <div className="flex gap-2">
                             <p>Ya tienes una cuenta? </p>
                             <Link
-                                className="no-underline text-primary-500 font-bold"
+                                className="font-bold text-primary-500 no-underline"
                                 to="/signin"
                             >
                                 Inicia sesión
@@ -26,7 +23,7 @@ function Signup() {
                         <div className="flex gap-2">
                             <p>Volver al</p>
                             <Link
-                                className="no-underline text-primary-500 font-bold"
+                                className="font-bold text-primary-500 no-underline"
                                 to="/"
                             >
                                 inicio
@@ -34,11 +31,11 @@ function Signup() {
                         </div>
                     </div>
                 </div>
-                <div className="hidden lg:flex w-1/2">
+                <div className="hidden w-1/2 lg:flex">
                     <img
                         src={'/ataraxia-signupbanner.png'}
                         alt=""
-                        className="w-1/2 h-full object-cover absolute"
+                        className="absolute h-full w-1/2 object-cover"
                     />
                 </div>
             </div>
