@@ -9,6 +9,7 @@ import Signinform from '../components/Signinform'
 import Signup from '../pages/Signup/Signup'
 import Signupform from '../components/Signupform'
 import VerifyAccount from '../components/AccountVerify'
+import AdminPanel from '../pages/AdminPanel/AdminPanel'
 import { createBrowserRouter } from 'react-router-dom'
 
 const indexRouter = createBrowserRouter([
@@ -51,6 +52,10 @@ const indexRouter = createBrowserRouter([
             {
                 path: '/checkout',
                 element: <Checkout />,
+            },
+            {
+                path: '/admin',
+                element: <AdminPanel />,
             },
         ],
     },
