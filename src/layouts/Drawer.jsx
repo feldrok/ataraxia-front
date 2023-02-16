@@ -26,7 +26,7 @@ function Drawer({
     return (
         <>
             <nav
-                className={`fixed top-0 left-0 z-30 min-h-screen max-w-xs flex-col justify-between overflow-hidden bg-white shadow-md duration-300 ${
+                className={`fixed top-0 left-0 z-30 min-h-screen max-w-xs overflow-hidden bg-white shadow-md duration-300 ${
                     drawerOpen ? 'w-full' : 'w-0'
                 }`}
             >

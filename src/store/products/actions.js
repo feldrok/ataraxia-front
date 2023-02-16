@@ -3,6 +3,19 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 
 const API_URL = process.env.REACT_APP_API_URL
 
+const handleToken = () => {
+    const BEARER_TOKEN = localStorage.getItem('token')
+    if (BEARER_TOKEN) {
+        let config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${BEARER_TOKEN}`,
+            },
+        }
+        return config
+    }
+}
+
 const getProducts = createAsyncThunk(
     'products/getProducts',
     async (category_id = '') => {
@@ -41,9 +54,33 @@ const getProductById = createAsyncThunk(
     }
 )
 
+const updateProduct = createAsyncThunk(
+    'products/updateProduct',
+    async ({ id, product }) => {
+        try {
+            const response = await axios.put(
+                `${API_URL}/products/${id}`,
+                product,
+                handleToken()
+            )
+            return {
+                product: response.data,
+                message: 'Product updated successfully',
+            }
+        } catch (error) {
+            console.log(error)
+            return {
+                product: {},
+                message: error.message,
+            }
+        }
+    }
+)
+
 const productActions = {
     getProducts,
     getProductById,
+    updateProduct,
 }
 
 export default productActions
