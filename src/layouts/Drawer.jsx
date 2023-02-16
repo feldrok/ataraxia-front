@@ -11,8 +11,13 @@ function Drawer({
     session,
     handleLogout,
 }) {
+    const [drawerOpen, setDrawerOpen] = useState(isOpen)
     const storeUser = useSelector((store) => store.user)
     const [isLogged, setIsLogged] = useState(session)
+
+    useEffect(() => {
+        setDrawerOpen(isOpen)
+    }, [isOpen])
 
     useEffect(() => {
         setIsLogged(session)
@@ -22,7 +27,7 @@ function Drawer({
         <>
             <nav
                 className={`fixed top-0 left-0 z-30 min-h-screen max-w-xs flex-col justify-between overflow-hidden bg-white shadow-md duration-300 ${
-                    isOpen ? 'w-full' : 'w-0'
+                    drawerOpen ? 'w-full' : 'w-0'
                 }`}
             >
                 <div className="flex w-full flex-col">
@@ -98,18 +103,28 @@ function Drawer({
                             </div>
                         ) : (
                             <div className="flex flex-col gap-4 p-2">
-                                <Link
-                                    className="w-full rounded-md border-2 border-primary-500 p-2 text-center font-medium text-primary-500 duration-300 hover:bg-primary-500 hover:text-white"
-                                    to="/signin"
+                                <div
+                                    className="flex w-full"
+                                    onClick={() => setDrawerOpen(false)}
                                 >
-                                    Iniciar Sesión
-                                </Link>
-                                <Link
-                                    className="w-full rounded-md border-2 border-primary-500 p-2 text-center font-medium text-primary-500 duration-300 hover:bg-primary-500 hover:text-white"
-                                    to="/signup"
+                                    <Link
+                                        className="w-full rounded-md border-2 border-primary-500 p-2 text-center font-medium text-primary-500 duration-300 hover:bg-primary-500 hover:text-white"
+                                        to="/signin"
+                                    >
+                                        Iniciar Sesión
+                                    </Link>
+                                </div>
+                                <div
+                                    className="flex w-full"
+                                    onClick={() => setDrawerOpen(false)}
                                 >
-                                    Registrarse
-                                </Link>
+                                    <Link
+                                        className="w-full rounded-md border-2 border-primary-500 p-2 text-center font-medium text-primary-500 duration-300 hover:bg-primary-500 hover:text-white"
+                                        to="/signup"
+                                    >
+                                        Registrarse
+                                    </Link>
+                                </div>
                             </div>
                         )}
                     </div>
@@ -117,7 +132,7 @@ function Drawer({
             </nav>
             <div
                 className={`backdrop-brightness-70 fixed left-0 top-0 z-20 min-h-screen backdrop-blur-sm backdrop-filter duration-150 ${
-                    isOpen ? 'w-full' : 'w-0'
+                    drawerOpen ? 'w-full' : 'w-0'
                 }`}
                 onClick={handleOnClick}
             ></div>
