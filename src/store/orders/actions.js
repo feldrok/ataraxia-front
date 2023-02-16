@@ -54,7 +54,6 @@ const getOrders = createAsyncThunk('getOrders', async () => {
             `${API_URL}/checkout/all`,
             handleToken()
         )
-        console.log(response)
         return {
             orders: response.data,
             message: response.data.message,

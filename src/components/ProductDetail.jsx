@@ -22,7 +22,7 @@ function ProductDetail({
     }
 
     return (
-        <div className="flex w-full flex-wrap justify-center pt-20 pb-40">
+        <div className="m-auto flex w-full max-w-7xl flex-wrap items-center justify-center pt-20 pb-40">
             <div className="flex w-full justify-center p-4 lg:w-1/2">
                 <img className="shadow-md" src={image} alt={name} />
             </div>
@@ -106,15 +106,6 @@ function ProductDetail({
                             bgColor={bgColor}
                             bgHoverColor={bgHoverColor}
                             id={id}
-                        />
-                        <FastBuy
-                            textColor={textColor}
-                            bgColor={bgColor}
-                            bgHoverColor={bgHoverColor}
-                            image={image}
-                            price={price}
-                            stock={stock}
-                            name={name}
                         />
                     </div>
                 ) : (

@@ -1,5 +1,7 @@
-import BillingDetail from '../components/BillingDetail'
+import AdminPanel from '../pages/AdminPanel/AdminPanel'
+import AdminTabs from '../components/AdminTabs'
 import Checkout from '../pages/Checkout/Checkout'
+import EditProduct from '../components/EditProduct'
 import Home from '../pages/Home/Home'
 import Layout from '../layouts/Layout'
 import ProductPage from '../pages/ProductPage/ProductPage'
@@ -9,7 +11,6 @@ import Signinform from '../components/Signinform'
 import Signup from '../pages/Signup/Signup'
 import Signupform from '../components/Signupform'
 import VerifyAccount from '../components/AccountVerify'
-import AdminPanel from '../pages/AdminPanel/AdminPanel'
 import { createBrowserRouter } from 'react-router-dom'
 
 const indexRouter = createBrowserRouter([
@@ -56,6 +57,16 @@ const indexRouter = createBrowserRouter([
             {
                 path: '/admin',
                 element: <AdminPanel />,
+                children: [
+                    {
+                        path: '/admin',
+                        element: <AdminTabs />,
+                    },
+                    {
+                        path: '/admin/product/:id',
+                        element: <EditProduct />,
+                    },
+                ],
             },
         ],
     },

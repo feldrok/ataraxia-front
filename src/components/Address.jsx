@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { CheckIcon } from '@heroicons/react/solid'
-import { Link } from 'react-router-dom'
 import { RadioGroup } from '@headlessui/react'
 import addressActions from '../store/address/actions'
 
