@@ -79,7 +79,7 @@ function AdminOrders() {
                             ) : (
                                 storeOrders.orders?.response?.map((order) => (
                                     <tr
-                                        key={order.id}
+                                        key={order._id}
                                         className="duration-100 hover:bg-gray-200"
                                     >
                                         <td className="border-b px-4 py-4 text-left text-xs font-medium uppercase tracking-wider text-gray-600">
