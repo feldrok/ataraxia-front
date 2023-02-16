@@ -91,26 +91,26 @@ function CartItem({ product }) {
     }
 
     return (
-        <div className="relative flex w-full justify-center gap-2 p-1">
+        <div className="relative flex w-full justify-center p-1">
             {loading === true ? (
                 <div className="absolute flex h-full w-full items-center justify-center bg-[rgba(255,255,255,.8)]">
                     <ThreeDots stroke="black" />
                 </div>
             ) : null}
 
-            <div className="flex">
+            <div className="h-32 w-64">
                 <img
-                    className="h-32 w-32 rounded-md object-cover shadow-md"
+                    className="h-32 w-64 rounded-md object-cover shadow-md"
                     src={producto?.image[0]}
                     alt=""
                 />
             </div>
-            <div className="flex flex-col justify-evenly p-2">
+            <div className="flex w-32 flex-col justify-evenly p-2">
                 <h1 className="font-bold text-gray-800">{producto?.name}</h1>
                 <p className="text-sm text-gray-600">
                     {producto?.ml ? `${producto?.ml} ml` : null}
                 </p>
-                <div className="flex rounded-md border bg-gray-100 shadow-md">
+                <div className="flex w-min rounded-md border bg-gray-100 shadow-md">
                     <button
                         className="hover:bg-gray-300"
                         onClick={reduceQuantity}
@@ -179,9 +179,7 @@ function CartItem({ product }) {
                 </div>
             </div>
         </div>
-            
-        )}
-    
-
+    )
+}
 
 export default CartItem

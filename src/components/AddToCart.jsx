@@ -29,7 +29,7 @@ export const AddToCart = ({ stock, bgColor, bgHoverColor, id }) => {
                     quantity: quantity,
                 }
                 if (storeCart.cart.cart?.response?.length === 0) {
-                    await dispatch(
+                    dispatch(
                         createCart({
                             id: token ? token : guestToken,
                             data: product,
@@ -55,7 +55,7 @@ export const AddToCart = ({ stock, bgColor, bgHoverColor, id }) => {
             console.log(error)
         } finally {
             setLoading(false)
-            await dispatch(getCart(token ? token : guestToken))
+            dispatch(getCart(token ? token : guestToken))
         }
     }
 
