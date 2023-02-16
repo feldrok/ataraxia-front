@@ -20,9 +20,9 @@ function Home() {
     }, [])
 
     const filteredProducts = (category) => {
-        return storeProducts.products?.response?.filter(
-            (product) => product.category_id._id === category
-        )
+        return storeProducts.products?.response
+            ?.filter((product) => product.category_id._id === category)
+            .slice(0, 4)
     }
 
     return (

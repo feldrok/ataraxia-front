@@ -16,7 +16,14 @@ function AdminProducts() {
 
     return (
         <div className="flex flex-col items-center justify-center">
-            <h1 className="text-3xl font-bold text-primary-500">Productos</h1>
+            <div className="flex w-full items-center justify-end">
+                <Link
+                    to={'/admin/product/new'}
+                    className="mr-2 rounded-md bg-primary-500 p-2 text-sm text-white duration-200 hover:bg-primary-300"
+                >
+                    Nuevo Producto
+                </Link>
+            </div>
             <div className="m-2 flex max-w-2xl flex-col items-center rounded-md bg-gray-100 p-4">
                 <div>
                     <table className="w-full">

@@ -16,6 +16,29 @@ const handleToken = () => {
     }
 }
 
+const createProduct = createAsyncThunk(
+    'products/createProduct',
+    async (product) => {
+        try {
+            const response = await axios.post(
+                `${API_URL}/products`,
+                product,
+                handleToken()
+            )
+            return {
+                product: response.data,
+                message: 'Producto creado con éxito',
+            }
+        } catch (error) {
+            console.log(error)
+            return {
+                product: error.response.data.response,
+                message: 'Error al crear el producto',
+            }
+        }
+    }
+)
+
 const getProducts = createAsyncThunk(
     'products/getProducts',
     async (category_id = '') => {
@@ -65,19 +88,20 @@ const updateProduct = createAsyncThunk(
             )
             return {
                 product: response.data,
-                message: 'Product updated successfully',
+                message: 'Producto actualizado con éxito',
             }
         } catch (error) {
             console.log(error)
             return {
-                product: {},
-                message: error.message,
+                product: error.response.data,
+                message: 'Error al actualizar el producto',
             }
         }
     }
 )
 
 const productActions = {
+    createProduct,
     getProducts,
     getProductById,
     updateProduct,

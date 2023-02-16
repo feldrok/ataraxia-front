@@ -79,7 +79,7 @@ function Drawer({
                                   ))
                                 : null}
                             {isLogged &&
-                            storeUser.user?.response?.user.is_admin ? (
+                            storeUser.user?.response?.user?.is_admin ? (
                                 <li className="flex w-full">
                                     <Link
                                         className="w-full rounded-md p-2 font-medium text-primary-500 duration-300 hover:bg-primary-500 hover:text-white"

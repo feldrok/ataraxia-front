@@ -98,9 +98,9 @@ function CartItem({ product }) {
                 </div>
             ) : null}
 
-            <div className="h-32 w-64">
+            <div className="flex h-32 w-32">
                 <img
-                    className="h-32 w-64 rounded-md object-cover shadow-md"
+                    className="h-32 w-32 rounded-md object-cover shadow-md"
                     src={producto?.image[0]}
                     alt=""
                 />

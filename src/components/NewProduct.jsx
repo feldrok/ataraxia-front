@@ -4,83 +4,80 @@ import { useDispatch, useSelector } from 'react-redux'
 import categoryActions from '../store/categories/actions'
 import productActions from '../store/products/actions'
 import { toast } from 'react-hot-toast'
-import { useParams } from 'react-router'
 
-const { getProductById, updateProduct } = productActions
+const { createProduct } = productActions
 const { getCategories } = categoryActions
 
-function EditProduct() {
-    const storeProducts = useSelector((state) => state.products)
+function NewProduct() {
     const storeCategories = useSelector((state) => state.categories)
-    const [category, setCategory] = useState(
-        storeProducts.product?.response?.category_id?._id
-    )
+    const storeProducts = useSelector((state) => state.products)
+    const [loading, setLoading] = useState(false)
+    const [category, setCategory] = useState('')
     const dispatch = useDispatch()
-    const params = useParams()
-    const { id } = params
-
-    const [product, setProduct] = useState(null)
 
     useEffect(() => {
-        if (id !== storeProducts.product?.response?._id) {
-            dispatch(getProductById(id))
-        }
         dispatch(getCategories())
-        setProduct(storeProducts.product?.response)
-        setCategory(storeProducts.product?.response?.category_id?._id)
-    }, [storeProducts])
+    }, [])
 
-    const handleEdit = (e) => {
+    const handleCreate = async (e) => {
         e.preventDefault()
-        setCategory(category)
         const formData = new FormData(e.target)
-        let updatedProduct = {
+        const newProduct = {
             name: formData.get('name'),
             description: formData.get('description'),
             price: formData.get('price'),
             stock: formData.get('stock'),
-            image: formData.get('image'),
-            category_id: category,
+            category_id: formData.get('category'),
         }
         if (formData.getAll('image') !== []) {
-            updatedProduct.image = formData.getAll('image')
+            newProduct.image = formData.getAll('image')
         }
         if (formData.get('abv')) {
-            updatedProduct.abv = formData.get('abv')
+            newProduct.abv = formData.get('abv')
         }
         if (formData.get('ibu')) {
-            updatedProduct.ibu = formData.get('ibu')
+            newProduct.ibu = formData.get('ibu')
         }
         if (formData.get('ml')) {
-            updatedProduct.ml = formData.get('ml')
+            newProduct.ml = formData.get('ml')
         }
         if (formData.get('packSize')) {
-            updatedProduct.packSize = formData.get('packSize')
+            newProduct.packSize = formData.get('packSize')
         }
-        dispatch(updateProduct({ id: id, product: updatedProduct }))
+
+        dispatch(createProduct(newProduct))
     }
 
     useEffect(() => {
-        if (storeProducts.message === 'Producto actualizado con éxito') {
-            toast.success(storeProducts.message)
+        if (storeProducts.message === 'Producto creado con éxito') {
+            toast.success('Producto creado con éxito')
+            setLoading(false)
         }
-        if (storeProducts.message === 'Error al actualizar el producto') {
-            storeProducts.product?.response?.map((error) =>
-                toast.error(error.message)
-            )
+        if (storeProducts.message === 'Error al crear el producto') {
+            if (storeProducts.product === 'El producto ya existe') {
+                toast.error('El producto ya existe')
+                setLoading(false)
+            } else {
+                storeProducts.product?.map((msg) =>
+                    toast.error(msg.message, {
+                        position: 'top-right',
+                    })
+                )
+                setLoading(false)
+            }
         }
     }, [storeProducts])
 
-    console.log(storeProducts)
-
     return (
         <div className="flex w-full flex-col items-center">
-            <h1 className="text-center text-3xl font-bold text-primary-500">
-                Editar producto
-            </h1>
+            <div className="flex w-full justify-center">
+                <h1 className="text-center text-3xl font-bold text-primary-500">
+                    Nuevo producto
+                </h1>
+            </div>
             <div className="my-10 flex w-full justify-center rounded-md bg-gray-100 md:max-w-4xl">
                 <form
-                    onSubmit={handleEdit}
+                    onSubmit={handleCreate}
                     className="mx-4 w-full py-6 md:max-w-2xl"
                 >
                     <div className="mb-4 flex justify-between">
@@ -94,7 +91,7 @@ function EditProduct() {
                             <input
                                 type="text"
                                 name="name"
-                                defaultValue={product?.name}
+                                placeholder="Nombre del producto"
                                 className="mt-1 block w-full rounded-md border-gray-300 p-2 shadow-sm outline-primary-500 focus:border-primary-500 focus:ring-primary-500"
                             />
                         </div>
@@ -109,28 +106,26 @@ function EditProduct() {
                                 onChange={(e) => {
                                     setCategory(e.target.value)
                                 }}
-                                className="mt-1 block w-full rounded-md border-gray-300 bg-white p-2 shadow-sm outline-primary-500 focus:border-primary-500 focus:ring-primary-500"
+                                name="category"
+                                className={`${
+                                    category === ''
+                                        ? 'text-gray-400'
+                                        : 'text-black'
+                                } mt-1 block w-full rounded-md border-gray-300 bg-white p-2  shadow-sm outline-primary-500 focus:border-primary-500 focus:ring-primary-500`}
                             >
-                                <option
-                                    value={category}
-                                    defaultValue={category}
-                                >
-                                    {product?.category_id?.name}
+                                <option value="">
+                                    Seleccione una categoría
                                 </option>
-                                {storeCategories.categories.response
-                                    ?.filter(
-                                        (category) =>
-                                            category._id !==
-                                            product?.category_id?._id
-                                    )
-                                    ?.map((category) => (
+                                {storeCategories.categories.response?.map(
+                                    (category) => (
                                         <option
                                             key={category._id}
                                             value={category._id}
                                         >
                                             {category.name}
                                         </option>
-                                    ))}
+                                    )
+                                )}
                             </select>
                         </div>
                     </div>
@@ -149,7 +144,7 @@ function EditProduct() {
                                 <input
                                     type="number"
                                     name="price"
-                                    defaultValue={product?.price}
+                                    placeholder="Precio"
                                     className="mt-1 block w-full rounded-md border-gray-300 p-2 pl-5 shadow-sm outline-primary-500 focus:border-primary-500 focus:ring-primary-500"
                                 />
                             </div>
@@ -164,14 +159,16 @@ function EditProduct() {
                             <input
                                 type="number"
                                 name="stock"
-                                defaultValue={product?.stock}
+                                placeholder="Stock"
                                 className="mt-1 block w-full rounded-md border-gray-300 p-2 shadow-sm outline-primary-500 focus:border-primary-500 focus:ring-primary-500"
                             />
                         </div>
                     </div>
-                    {product?.abv || product?.ibu ? (
-                        <div className="mb-4 flex justify-between">
-                            <>
+                    {storeCategories.categories.response?.find(
+                        (category) => category.name === 'cervezas'
+                    )._id === category ? (
+                        <>
+                            <div className="mb-4 flex justify-between">
                                 <div className="w-1/2 pr-2">
                                     <label
                                         htmlFor="price"
@@ -182,7 +179,7 @@ function EditProduct() {
                                     <input
                                         type="number"
                                         name="price"
-                                        defaultValue={product?.abv}
+                                        placeholder="ABV"
                                         className="mt-1 block w-full rounded-md border-gray-300 p-2 shadow-sm outline-primary-500 focus:border-primary-500 focus:ring-primary-500"
                                     />
                                 </div>
@@ -196,16 +193,12 @@ function EditProduct() {
                                     <input
                                         type="number"
                                         name="price"
-                                        defaultValue={product?.ibu}
+                                        placeholder="IBU"
                                         className="mt-1 block w-full rounded-md border-gray-300 p-2 shadow-sm outline-primary-500 focus:border-primary-500 focus:ring-primary-500"
                                     />
                                 </div>
-                            </>
-                        </div>
-                    ) : null}
-                    {product?.ml || product?.packSize ? (
-                        <div className="mb-4 flex justify-between">
-                            <>
+                            </div>
+                            <div className="mb-4 flex justify-between">
                                 <div className="w-1/2 pr-2">
                                     <label
                                         htmlFor="ml"
@@ -216,7 +209,7 @@ function EditProduct() {
                                     <input
                                         type="number"
                                         name="ml"
-                                        defaultValue={product?.ml}
+                                        placeholder="ml/botella"
                                         className="mt-1 block w-full rounded-md border-gray-300 p-2 shadow-sm outline-primary-500 focus:border-primary-500 focus:ring-primary-500"
                                     />
                                 </div>
@@ -230,11 +223,45 @@ function EditProduct() {
                                     <input
                                         type="number"
                                         name="packSize"
-                                        defaultValue={product?.packSize}
+                                        placeholder="Cantidad botellas"
                                         className="mt-1 block w-full rounded-md border-gray-300 p-2 shadow-sm outline-primary-500 focus:border-primary-500 focus:ring-primary-500"
                                     />
                                 </div>
-                            </>
+                            </div>
+                        </>
+                    ) : null}
+                    {storeCategories.categories.response?.find(
+                        (category) => category.name === 'packs'
+                    )._id === category ? (
+                        <div className="mb-4 flex justify-between">
+                            <div className="w-1/2 pr-2">
+                                <label
+                                    htmlFor="ml"
+                                    className="block text-sm font-medium text-gray-700"
+                                >
+                                    ml/botella
+                                </label>
+                                <input
+                                    type="number"
+                                    name="ml"
+                                    placeholder="ml/botella"
+                                    className="mt-1 block w-full rounded-md border-gray-300 p-2 shadow-sm outline-primary-500 focus:border-primary-500 focus:ring-primary-500"
+                                />
+                            </div>
+                            <div className="w-1/2 pl-2">
+                                <label
+                                    htmlFor="packSize"
+                                    className="block text-sm font-medium text-gray-700"
+                                >
+                                    Cantidad botellas
+                                </label>
+                                <input
+                                    type="number"
+                                    name="packSize"
+                                    placeholder="Cantidad botellas"
+                                    className="mt-1 block w-full rounded-md border-gray-300 p-2 shadow-sm outline-primary-500 focus:border-primary-500 focus:ring-primary-500"
+                                />
+                            </div>
                         </div>
                     ) : null}
                     <div className="mb-4">
@@ -244,15 +271,18 @@ function EditProduct() {
                         >
                             Imágenes
                         </label>
-                        {product?.image?.map((image, index) => (
-                            <input
-                                key={index}
-                                type="text"
-                                name="image"
-                                defaultValue={image}
-                                className="mt-1 block w-full rounded-md border-gray-300 p-2 shadow-sm outline-primary-500 focus:border-primary-500 focus:ring-primary-500"
-                            />
-                        ))}
+                        <input
+                            type="text"
+                            name="image"
+                            placeholder="Imagen 1"
+                            className="mt-1 block w-full rounded-md border-gray-300 p-2 shadow-sm outline-primary-500 focus:border-primary-500 focus:ring-primary-500"
+                        />
+                        <input
+                            type="text"
+                            name="image"
+                            placeholder="Imagen 2"
+                            className="mt-1 block w-full rounded-md border-gray-300 p-2 shadow-sm outline-primary-500 focus:border-primary-500 focus:ring-primary-500"
+                        />
                     </div>
                     <div className="mb-4">
                         <label
@@ -264,7 +294,7 @@ function EditProduct() {
                         <textarea
                             type="text"
                             name="description"
-                            defaultValue={product?.description}
+                            placeholder="Descripción del producto"
                             className="mt-1 block h-52 w-full rounded-md border-gray-300 p-2 shadow-sm outline-primary-500 focus:border-primary-500 focus:ring-primary-500"
                         />
                     </div>
@@ -281,4 +311,4 @@ function EditProduct() {
     )
 }
 
-export default EditProduct
+export default NewProduct

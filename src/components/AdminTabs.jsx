@@ -10,24 +10,17 @@ function AdminTabs() {
                 <Tab.List className={'flex gap-2 p-4'}>
                     <Tab
                         className={
-                            'px-4 py-2 outline-none duration-200 ui-selected:border-b-2 ui-selected:border-primary-500 ui-selected:text-primary-500 ui-not-selected:text-gray-500'
+                            'px-4 py-2 text-xl font-bold outline-none duration-200 ui-selected:border-b-2 ui-selected:border-primary-500 ui-selected:text-primary-500 ui-not-selected:text-gray-500'
                         }
                     >
                         Pedidos
                     </Tab>
                     <Tab
                         className={
-                            'px-4 py-2 outline-none duration-200 ui-selected:border-b-2 ui-selected:border-primary-500 ui-selected:text-primary-500 ui-not-selected:text-gray-500'
+                            'px-4 py-2 text-xl font-bold outline-none duration-200 ui-selected:border-b-2 ui-selected:border-primary-500 ui-selected:text-primary-500 ui-not-selected:text-gray-500'
                         }
                     >
-                        Products
-                    </Tab>
-                    <Tab
-                        className={
-                            'px-4 py-2 outline-none duration-200 ui-selected:border-b-2 ui-selected:border-primary-500 ui-selected:text-primary-500 ui-not-selected:text-gray-500'
-                        }
-                    >
-                        Clientes
+                        Productos
                     </Tab>
                 </Tab.List>
                 <Tab.Panels>
