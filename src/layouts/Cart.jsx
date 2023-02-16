@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import CartItem from '../components/CartItem'
@@ -9,10 +9,15 @@ import { decodeToken } from 'react-jwt'
 const { getCart } = cartActions
 
 function Cart({ handleOnClick, isOpen }) {
+    const [cartOpen, setCartOpen] = useState(isOpen)
     const storeCart = useSelector((store) => store.cart)
     const storeUser = useSelector((store) => store.user)
     const dispatch = useDispatch()
     const products = storeCart.cart.cart?.response[0]?.products
+
+    useEffect(() => {
+        setCartOpen(isOpen)
+    }, [isOpen])
 
     useEffect(() => {
         let token = localStorage.getItem('token')
@@ -27,7 +32,7 @@ function Cart({ handleOnClick, isOpen }) {
         <>
             <nav
                 className={`fixed top-0 right-0 z-30 min-h-screen max-w-xs overflow-hidden bg-white shadow-md duration-300 ${
-                    isOpen ? 'w-full' : 'w-0'
+                    cartOpen ? 'w-full' : 'w-0'
                 }`}
             >
                 <div className="flex h-screen w-full flex-col justify-between">
@@ -62,18 +67,23 @@ function Cart({ handleOnClick, isOpen }) {
                                 ARS
                             </p>
                         </div>
-                        <Link
-                            to={'/checkout'}
-                            className="rounded-sm border-2 border-primary-500 bg-white p-4 text-center font-bold uppercase text-primary-500 duration-300 hover:bg-primary-500 hover:text-white"
+                        <div
+                            className="flex justify-center p-4"
+                            onClick={() => setCartOpen(false)}
                         >
-                            Proceder al pago
-                        </Link>
+                            <Link
+                                to={'/checkout'}
+                                className="rounded-sm border-2 border-primary-500 bg-white p-4 text-center font-bold uppercase text-primary-500 duration-300 hover:bg-primary-500 hover:text-white"
+                            >
+                                Proceder al pago
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </nav>
             <div
                 className={`backdrop-brightness-70 fixed right-0 top-0 z-20 min-h-screen backdrop-blur-sm backdrop-filter duration-150 ${
-                    isOpen ? 'w-full' : 'w-0'
+                    cartOpen ? 'w-full' : 'w-0'
                 }`}
                 onClick={handleOnClick}
             ></div>
