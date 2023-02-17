@@ -177,10 +177,27 @@ function CartItem({ product }) {
                 </div>
                 <div className="flex flex-col">
                     <h2 className="whitespace-nowrap text-sm text-gray-800">
-                        ${producto?.price} c/u
+                        $
+                        {producto?.price
+                            .toLocaleString({
+                                style: 'currency',
+                                currency: 'ARS',
+                                minimumFractionDigits: 0,
+                                currencyDisplay: 'symbol',
+                            })
+                            .replace(',', '.')}{' '}
+                        c/u
                     </h2>
                     <h1 className="font-bold text-gray-900">
-                        ${producto?.price * quantity}
+                        $
+                        {(producto?.price * quantity)
+                            .toLocaleString({
+                                style: 'currency',
+                                currency: 'ARS',
+                                minimumFractionDigits: 0,
+                                currencyDisplay: 'symbol',
+                            })
+                            .replace(',', '.')}
                     </h1>
                 </div>
             </div>

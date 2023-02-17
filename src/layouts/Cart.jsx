@@ -60,11 +60,18 @@ function Cart({ handleOnClick, isOpen }) {
                         </div>
                     </div>
                     <div className="absolute bottom-0 flex h-[15%] w-full flex-col justify-center bg-white p-4">
-                        <div className="flex justify-between p-2">
+                        <div className="flex items-center justify-between p-2">
                             <h2 className="font-bold">Total</h2>
-                            <p className="font-light">
-                                ${storeCart.cart.cart?.response[0]?.total_price}{' '}
-                                ARS
+                            <p className="text-3xl font-bold">
+                                $
+                                {storeCart.cart.cart?.response[0]?.total_price
+                                    .toLocaleString({
+                                        style: 'currency',
+                                        currency: 'ARS',
+                                        minimumFractionDigits: 0,
+                                        currencyDisplay: 'symbol',
+                                    })
+                                    .replace(',', '.')}
                             </p>
                         </div>
                         <div
@@ -82,7 +89,7 @@ function Cart({ handleOnClick, isOpen }) {
                 </div>
             </nav>
             <div
-                className={`backdrop-brightness-70 fixed right-0 top-0 z-20 min-h-screen backdrop-blur-sm backdrop-filter duration-150 ${
+                className={`backdrop-brightness-20 fixed right-0 top-0 z-20 min-h-screen bg-[rgba(0,0,0,0.4)] backdrop-blur-sm backdrop-filter duration-150 ${
                     cartOpen ? 'w-full' : 'w-0'
                 }`}
                 onClick={handleOnClick}

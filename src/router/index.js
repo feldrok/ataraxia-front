@@ -1,10 +1,12 @@
 import AdminPanel from '../pages/AdminPanel/AdminPanel'
 import AdminTabs from '../components/AdminTabs'
+import BillingDetail from '../components/BillingDetail'
 import Checkout from '../pages/Checkout/Checkout'
 import EditProduct from '../components/EditProduct'
 import Home from '../pages/Home/Home'
 import Layout from '../layouts/Layout'
 import NewProduct from '../components/NewProduct'
+import OrderDetail from '../pages/OrderDetail/OrderDetail'
 import ProductPage from '../pages/ProductPage/ProductPage'
 import Profile from '../pages/Profile/Profile'
 import Rating from '../components/Ratings'
@@ -12,6 +14,7 @@ import Signin from '../pages/Signin/Signin'
 import Signinform from '../components/Signinform'
 import Signup from '../pages/Signup/Signup'
 import Signupform from '../components/Signupform'
+import UserCheckoutForm from '../components/UserCheckoutForm'
 import VerifyAccount from '../components/AccountVerify'
 import { createBrowserRouter } from 'react-router-dom'
 
@@ -55,6 +58,16 @@ const indexRouter = createBrowserRouter([
             {
                 path: '/checkout',
                 element: <Checkout />,
+                children: [
+                    {
+                        path: '/checkout',
+                        element: <UserCheckoutForm />,
+                    },
+                    {
+                        path: '/checkout/details',
+                        element: <BillingDetail />,
+                    },
+                ],
             },
             {
                 path: '/admin',
@@ -73,6 +86,10 @@ const indexRouter = createBrowserRouter([
                         element: <NewProduct />,
                     },
                 ],
+            },
+            {
+                path: '/order/detail',
+                element: <OrderDetail />,
             },
         ],
     },

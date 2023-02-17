@@ -7,7 +7,7 @@ import addressActions from '../store/address/actions'
 
 const { getAddress } = addressActions
 
-function Address({ cart }) {
+function Address() {
     const storeAddress = useSelector((state) => state.address)
     const addressess = storeAddress.addresses?.response
     const [activeAddress, setActiveAddress] = useState()
