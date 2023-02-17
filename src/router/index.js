@@ -13,6 +13,7 @@ import Signup from '../pages/Signup/Signup'
 import Signupform from '../components/Signupform'
 import VerifyAccount from '../components/AccountVerify'
 import { createBrowserRouter } from 'react-router-dom'
+import OrderMp from '../components/OrderMp'
 
 const indexRouter = createBrowserRouter([
     {
@@ -79,6 +80,10 @@ const indexRouter = createBrowserRouter([
         path: '/verify/:user_id/:verify_code',
         element: <VerifyAccount />,
     },
+    {
+        path: '/order-mp',
+        element: <OrderMp />
+    }
 ])
 
 export default indexRouter
