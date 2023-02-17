@@ -6,6 +6,7 @@ import EditProduct from '../components/EditProduct'
 import Home from '../pages/Home/Home'
 import Layout from '../layouts/Layout'
 import NewProduct from '../components/NewProduct'
+import OrderDetail from '../pages/OrderDetail/OrderDetail'
 import ProductPage from '../pages/ProductPage/ProductPage'
 import Profile from '../pages/Profile/Profile'
 import Signin from '../pages/Signin/Signin'
@@ -84,6 +85,10 @@ const indexRouter = createBrowserRouter([
                         element: <NewProduct />,
                     },
                 ],
+            },
+            {
+                path: '/order/detail',
+                element: <OrderDetail />,
             },
         ],
     },

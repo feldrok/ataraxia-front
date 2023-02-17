@@ -14,6 +14,25 @@ const handleToken = () => {
     return config
 }
 
+const createOrder = createAsyncThunk(
+    'orders/createOrder',
+    async ({ id, preference_id = '', status = '' }) => {
+        try {
+            const response = await axios.post(
+                `${API_URL}/checkout/${id}/?preference_id=${preference_id}&status=${status}`
+            )
+            return {
+                order: response.data,
+                message: response.data.message,
+            }
+        } catch (error) {
+            return {
+                order: null,
+                message: error.response.data,
+            }
+        }
+    }
+)
 const getUserOrders = createAsyncThunk('orders/getUserOrders', async () => {
     try {
         const response = await axios.get(`${API_URL}/checkout`, handleToken())
@@ -67,10 +86,30 @@ const getOrders = createAsyncThunk('getOrders', async () => {
     }
 })
 
+const getOrder = createAsyncThunk('getOrder', async ({ id }) => {
+    try {
+        const response = await axios.get(
+            `${API_URL}/checkout/${id}`,
+            handleToken()
+        )
+        return {
+            order: response.data,
+            message: 'Orden obtenida',
+        }
+    } catch (error) {
+        return {
+            order: null,
+            message: 'Error al obtener la orden',
+        }
+    }
+})
+
 const orderActions = {
     getUserOrders,
     orderUpdate,
     getOrders,
+    createOrder,
+    getOrder,
 }
 
 export default orderActions

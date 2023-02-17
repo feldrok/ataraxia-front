@@ -85,7 +85,16 @@ function AdminProducts() {
                                                         : 'text-gray-600'
                                                 }`}
                                             >
-                                                ${product.price}
+                                                $
+                                                {product.price
+                                                    .toLocaleString({
+                                                        style: 'currency',
+                                                        currency: 'ARS',
+                                                        minimumFractionDigits: 0,
+                                                        currencyDisplay:
+                                                            'symbol',
+                                                    })
+                                                    .replace(',', '.')}
                                             </td>
                                             <td
                                                 className={`border-b px-4 py-4 text-left text-xs font-medium uppercase tracking-wider ${
