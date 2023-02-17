@@ -44,7 +44,6 @@ function NewProduct() {
         if (formData.get('packSize')) {
             newProduct.packSize = formData.get('packSize')
         }
-
         dispatch(createProduct(newProduct))
     }
 

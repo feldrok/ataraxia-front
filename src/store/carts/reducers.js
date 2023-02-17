@@ -8,6 +8,7 @@ const {
     updateCart,
     deleteItem,
     emptyCart,
+    applyCoupon,
 } = cartActions
 
 const initialState = {
@@ -53,6 +54,13 @@ const cartReducer = createReducer(initialState, (builder) => {
             return newState
         })
         .addCase(addProductToCart.fulfilled, (state, action) => {
+            let newState = {
+                cart: state.cart,
+                message: action.payload.message,
+            }
+            return newState
+        })
+        .addCase(applyCoupon.fulfilled, (state, action) => {
             let newState = {
                 cart: state.cart,
                 message: action.payload.message,

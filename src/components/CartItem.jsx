@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 
+import { Link } from 'react-router-dom'
 import { ThreeDots } from 'react-loading-icons'
 import cartActions from '../store/carts/actions'
 import { decodeToken } from 'react-jwt'
@@ -98,15 +99,20 @@ function CartItem({ product }) {
                 </div>
             ) : null}
 
-            <div className="flex h-32 w-32">
+            <Link to={`/product/${producto?._id}`} className="flex h-32 w-32">
                 <img
                     className="h-32 w-32 rounded-md object-cover shadow-md"
                     src={producto?.image[0]}
                     alt=""
                 />
-            </div>
+            </Link>
             <div className="flex w-32 flex-col justify-evenly p-2">
-                <h1 className="font-bold text-gray-800">{producto?.name}</h1>
+                <Link
+                    to={`/product/${producto?._id}`}
+                    className="font-bold text-gray-800"
+                >
+                    {producto?.name}
+                </Link>
                 <p className="text-sm text-gray-600">
                     {producto?.ml ? `${producto?.ml} ml` : null}
                 </p>
