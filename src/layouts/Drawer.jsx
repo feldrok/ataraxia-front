@@ -136,7 +136,7 @@ function Drawer({
                 </div>
             </nav>
             <div
-                className={`backdrop-brightness-70 fixed left-0 top-0 z-20 min-h-screen backdrop-blur-sm backdrop-filter duration-150 ${
+                className={`backdrop-brightness-20 fixed left-0 top-0 z-20 min-h-screen bg-[rgba(0,0,0,0.4)] backdrop-blur-sm backdrop-filter duration-150 ${
                     drawerOpen ? 'w-full' : 'w-0'
                 }`}
                 onClick={handleOnClick}

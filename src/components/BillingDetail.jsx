@@ -20,7 +20,7 @@ const BillingDetail = () => {
 
     useEffect(() => {
         dispatch(getProfile())
-        dispatch(getAddress(storeAddress.address.response._id))
+        dispatch(getAddress(storeAddress.address?.response?._id))
         let token = localStorage.getItem('token')
         if (token) {
             token = decodeToken(localStorage.getItem('token')).id
@@ -32,8 +32,8 @@ const BillingDetail = () => {
     const user = storeUser.profile?.response
     const address = storeAddress.address?.response
 
-    const orderMp = () => {
-        dispatch(createOrderMp(storeCart))
+    const orderMp = async () => {
+        await dispatch(createOrderMp(storeCart))
     }
 
     return (
