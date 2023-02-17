@@ -5,6 +5,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import orderMPReducer from './mercadopago/reducers'
 import orderReducer from './orders/reducers'
 import productReducer from './products/reducers'
+import ratingReducer from './ratings/reducers'
 import userReducer from './users/reducers'
 
 const store = configureStore({
@@ -16,6 +17,7 @@ const store = configureStore({
         orders: orderReducer,
         address: addressReducer,
         orderMP: orderMPReducer,
+        ratings: ratingReducer,
     },
 })
 
