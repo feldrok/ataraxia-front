@@ -60,11 +60,18 @@ function Cart({ handleOnClick, isOpen }) {
                         </div>
                     </div>
                     <div className="absolute bottom-0 flex h-[15%] w-full flex-col justify-center bg-white p-4">
-                        <div className="flex justify-between p-2">
+                        <div className="flex items-center justify-between p-2">
                             <h2 className="font-bold">Total</h2>
-                            <p className="font-light">
-                                ${storeCart.cart.cart?.response[0]?.total_price}{' '}
-                                ARS
+                            <p className="text-3xl font-bold">
+                                $
+                                {storeCart.cart.cart?.response[0]?.total_price
+                                    .toLocaleString({
+                                        style: 'currency',
+                                        currency: 'ARS',
+                                        minimumFractionDigits: 0,
+                                        currencyDisplay: 'symbol',
+                                    })
+                                    .replace(',', '.')}
                             </p>
                         </div>
                         <div

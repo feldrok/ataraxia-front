@@ -93,7 +93,15 @@ function AdminOrders() {
                                             {order.createdAt.slice(0, 10)}
                                         </td>
                                         <td className="border-b px-4 py-4 text-left text-xs font-medium uppercase tracking-wider text-gray-600">
-                                            ${order.total_price}
+                                            $
+                                            {order.total_price
+                                                .toLocaleString({
+                                                    style: 'currency',
+                                                    currency: 'ARS',
+                                                    minimumFractionDigits: 0,
+                                                    currencyDisplay: 'symbol',
+                                                })
+                                                .replace(',', '.')}
                                         </td>
                                         <td className="border-b px-4 py-4 text-left text-xs font-medium uppercase tracking-wider text-gray-600">
                                             <form>

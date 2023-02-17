@@ -68,7 +68,15 @@ function ProductCard({
                         </div>
                         {stock > 0 ? (
                             <p className="text-xl font-medium text-gray-600">
-                                ${price}
+                                $
+                                {price
+                                    .toLocaleString({
+                                        style: 'currency',
+                                        currency: 'ARS',
+                                        minimumFractionDigits: 0,
+                                        currencyDisplay: 'symbol',
+                                    })
+                                    .replace(',', '.')}
                             </p>
                         ) : (
                             <p className="text-xl font-bold text-red-500">
@@ -109,7 +117,15 @@ function ProductCard({
                             <p>{ml}ml c/botella</p>
                         </div>
                         <p className="text-xl font-medium text-gray-600">
-                            ${price}
+                            $
+                            {price
+                                .toLocaleString({
+                                    style: 'currency',
+                                    currency: 'ARS',
+                                    minimumFractionDigits: 0,
+                                    currencyDisplay: 'symbol',
+                                })
+                                .replace(',', '.')}
                         </p>
                     </div>
                     <AddToCart
@@ -141,7 +157,15 @@ function ProductCard({
                             {name}
                         </Link>
                         <p className="text-xl font-medium text-gray-600">
-                            ${price}
+                            $
+                            {price
+                                .toLocaleString({
+                                    style: 'currency',
+                                    currency: 'ARS',
+                                    minimumFractionDigits: 0,
+                                    currencyDisplay: 'symbol',
+                                })
+                                .replace(',', '.')}
                         </p>
                     </div>
                     <AddToCart
