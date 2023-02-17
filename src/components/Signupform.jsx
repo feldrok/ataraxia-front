@@ -35,7 +35,10 @@ function SignupUser() {
 
     useEffect(() => {
         if (userStore.message === 'Usuario creado con éxito') {
-            toast.success(userStore.message)
+            toast.success(
+                `${userStore.message}, por favor revisa tu correo electrónico y verifica tu cuenta.`
+            )
+
             navigate('/', { replace: true })
         }
         if (
