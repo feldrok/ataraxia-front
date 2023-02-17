@@ -52,7 +52,11 @@ function Drawer({
                     <div className="flex w-full flex-col">
                         <ul className="flex w-full flex-col p-2">
                             {routes.map((route) => (
-                                <li className="flex w-full" key={route.path}>
+                                <li
+                                    className="flex w-full"
+                                    key={route.path}
+                                    onClick={() => setDrawerOpen(false)}
+                                >
                                     <Link
                                         className="w-full rounded-md p-2 font-medium text-primary-500 duration-300 hover:bg-primary-500 hover:text-white"
                                         to={route.path}
@@ -68,6 +72,7 @@ function Drawer({
                                       <li
                                           className="flex w-full"
                                           key={route.path}
+                                          onClick={() => setDrawerOpen(false)}
                                       >
                                           <Link
                                               className="w-full rounded-md p-2 font-medium text-primary-500 duration-300 hover:bg-primary-500 hover:text-white"
@@ -79,7 +84,7 @@ function Drawer({
                                   ))
                                 : null}
                             {isLogged &&
-                            storeUser.user?.response?.user.is_admin ? (
+                            storeUser.user?.response?.user?.is_admin ? (
                                 <li className="flex w-full">
                                     <Link
                                         className="w-full rounded-md p-2 font-medium text-primary-500 duration-300 hover:bg-primary-500 hover:text-white"

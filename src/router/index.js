@@ -4,6 +4,7 @@ import Checkout from '../pages/Checkout/Checkout'
 import EditProduct from '../components/EditProduct'
 import Home from '../pages/Home/Home'
 import Layout from '../layouts/Layout'
+import NewProduct from '../components/NewProduct'
 import ProductPage from '../pages/ProductPage/ProductPage'
 import Profile from '../pages/Profile/Profile'
 import Signin from '../pages/Signin/Signin'
@@ -65,6 +66,10 @@ const indexRouter = createBrowserRouter([
                     {
                         path: '/admin/product/:id',
                         element: <EditProduct />,
+                    },
+                    {
+                        path: '/admin/product/new',
+                        element: <NewProduct />,
                     },
                 ],
             },

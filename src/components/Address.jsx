@@ -10,12 +10,16 @@ const { getAddress } = addressActions
 function Address({ cart }) {
     const storeAddress = useSelector((state) => state.address)
     const addressess = storeAddress.addresses?.response
-    const [activeAddress, setActiveAddress] = useState(addressess[0]?._id)
+    const [activeAddress, setActiveAddress] = useState()
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(getAddress(activeAddress))
     }, [activeAddress])
+
+    useEffect(() => {
+        setActiveAddress(addressess[0]?._id)
+    }, [])
 
     return (
         <div className="flex w-full flex-col items-center justify-center p-4">

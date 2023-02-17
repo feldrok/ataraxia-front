@@ -46,7 +46,6 @@ function AdminOrders() {
 
     return (
         <div className="flex flex-col items-center justify-center">
-            <h1 className="text-3xl font-bold text-primary-500">Pedidos</h1>
             <div className="m-2 flex max-w-2xl flex-col items-center rounded-md bg-gray-100 p-4">
                 <div>
                     <table className="w-full">

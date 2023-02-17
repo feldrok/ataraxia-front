@@ -134,6 +134,28 @@ const emptyCart = createAsyncThunk('cart/emptyCart', async () => {
     }
 })
 
+const applyCoupon = createAsyncThunk(
+    'cart/applyCoupon',
+    async ({ id, coupon }) => {
+        try {
+            const response = await axios.put(
+                `${API_URL}/cart/coupon/${id}`,
+                coupon,
+                handleToken()
+            )
+            return {
+                cart: response.data,
+                message: 'Coupon applied successfully',
+            }
+        } catch (error) {
+            return {
+                cart: null,
+                message: error.response.data,
+            }
+        }
+    }
+)
+
 const cartActions = {
     createCart,
     getCart,
@@ -141,6 +163,7 @@ const cartActions = {
     updateCart,
     deleteItem,
     emptyCart,
+    applyCoupon,
 }
 
 export default cartActions
