@@ -1,7 +1,7 @@
+import { Link, Outlet } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { Link } from 'react-router-dom'
 import OrderDetails from './OrderDetails'
 import UserCheckoutForm from './UserCheckoutForm'
 import cartActions from '../store/carts/actions'
@@ -51,7 +51,7 @@ const FormCheckout = () => {
                             </p>
                         </div>
                     )}
-                    <UserCheckoutForm session={isLogged} />
+                    <Outlet />
                 </div>
                 <OrderDetails
                     items={storeCart.cart.cart?.response[0]?.products}

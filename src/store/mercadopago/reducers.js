@@ -8,7 +8,7 @@ const initialState = {
     message: '',
 }
 
-const orderReducer = createReducer(initialState, (builder) => {
+const orderMPReducer = createReducer(initialState, (builder) => {
     builder.addCase(createOrderMp.fulfilled, (state, action) => {
         let newState = {
             orders: action.payload.ordersMp,
@@ -18,5 +18,4 @@ const orderReducer = createReducer(initialState, (builder) => {
     })
 })
 
-
-export default orderReducer
+export default orderMPReducer

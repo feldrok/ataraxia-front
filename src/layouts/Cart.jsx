@@ -82,7 +82,7 @@ function Cart({ handleOnClick, isOpen }) {
                 </div>
             </nav>
             <div
-                className={`backdrop-brightness-70 fixed right-0 top-0 z-20 min-h-screen backdrop-blur-sm backdrop-filter duration-150 ${
+                className={`backdrop-brightness-20 fixed right-0 top-0 z-20 min-h-screen bg-[rgba(0,0,0,0.4)] backdrop-blur-sm backdrop-filter duration-150 ${
                     cartOpen ? 'w-full' : 'w-0'
                 }`}
                 onClick={handleOnClick}
