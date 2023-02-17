@@ -14,14 +14,14 @@ const VerifyAccount = () => {
     }, [])
     return (
         <div className="background-container h-screen w-screen bg-[url('/public/banner1.jpg')] bg-cover bg-top bg-no-repeat">
-            <div className="verify-div flex h-full w-full items-center justify-center gap-4 bg-transparent">
-                <div className="verify-div2 flex flex-col items-center">
+            <div className="flex h-full w-full items-center justify-center gap-4 bg-transparent">
+                <div className="flex flex-col items-center gap-6 rounded-md bg-[rgba(0,0,0,.7)] p-8 text-center">
                     <h1 className="verify-message m-0 bg-transparent text-[4rem] text-white">
                         Tu cuenta fue verificada!
                     </h1>
                     <Anchor
-                        className="verify-redirect cursor-pointer border-0 bg-transparent text-[1.2rem] font-bold text-white"
-                        to="/"
+                        className="cursor-pointer rounded-md border-0 bg-primary-500 p-4 text-xl font-bold text-white"
+                        to="/signin"
                     >
                         Iniciá sesión
                     </Anchor>

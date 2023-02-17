@@ -26,6 +26,9 @@ function Signin() {
         if (storeUser.message === 'Email incorrecto') {
             toast.error(storeUser.message)
         }
+        if (storeUser.message === 'verify your account!') {
+            toast.error('Porfavor verifica tu cuenta')
+        }
     }, [storeUser])
 
     const handleSignIn = async (e) => {
