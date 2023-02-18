@@ -12,6 +12,10 @@ const routes = [
         path: '/',
         name: 'Home',
     },
+    {
+        path: '/aboutUs',
+        name: 'Sobre Nosotros',
+    },
 ]
 
 const protectedRoutes = [
