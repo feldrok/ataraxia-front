@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import Footer from './Footer'
 import Nav from './Nav'
+import Modal from '../components/Adult'
 import cryptoRandomString from 'crypto-random-string'
 import userActions from '../store/users/actions'
 
@@ -33,6 +34,7 @@ function Layout() {
     return (
         <>
             <Nav session={isLogged} />
+            <Modal/>
             <div className="pt-20">
                 <Outlet />
             </div>
