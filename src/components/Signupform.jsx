@@ -120,7 +120,7 @@ function SignupUser() {
                     </div>
                     <div className="w-full">
                         <label className="text-primary-500" htmlFor="password">
-                            Contraseña <span className='text-xs text-black'>(10 caracteres mínimo)</span>
+                            Contraseña <span className='text-xs text-black'>(8 caracteres mínimo)</span>
                         </label>
                         <input
                             autoComplete="false"
