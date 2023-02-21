@@ -3,7 +3,7 @@ import React from 'react'
 
 const Checkout = () => {
     return (
-        <div>
+        <div className="flex min-h-[800px] items-center justify-center">
             <FormCheckout />
         </div>
     )

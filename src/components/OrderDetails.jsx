@@ -46,7 +46,7 @@ function OrderDetails({ items, price }) {
     }, [storeCart])
 
     return (
-        <div className="m-auto grid max-w-xl rounded-sm bg-gray-100 shadow-md md:order-2">
+        <div className="m-2 grid max-w-xl rounded-sm bg-gray-100 shadow-md md:order-2">
             <div className="w-100 h-80 overflow-y-auto border-b-2 border-gray-300 py-10">
                 {items?.map((item) => (
                     <CartItem key={item._id} product={item} />

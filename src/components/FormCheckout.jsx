@@ -37,7 +37,7 @@ const FormCheckout = () => {
     return (
         <>
             <div className="grid grid-cols-1 md:grid-cols-2">
-                <div className="order-2 m-auto flex max-w-xl flex-col items-center justify-center md:order-1">
+                <div className="order-2 m-2 flex max-w-xl flex-col items-center justify-center md:order-1">
                     {isLogged ? null : (
                         <div className="text-center">
                             <p className="font-light">
