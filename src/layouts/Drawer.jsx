@@ -50,7 +50,7 @@ function Drawer({
                 </div>
                 <div className="flex h-screen flex-col justify-between">
                     <div className="flex w-full flex-col">
-                        <ul className="flex w-full flex-col p-2">
+                        <ul className="flex w-full flex-col gap-4 p-2">
                             {routes.map((route) => (
                                 <li
                                     className="flex w-full"
