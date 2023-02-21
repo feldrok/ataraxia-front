@@ -78,7 +78,7 @@ export default function ModalAge({ modalState }) {
                                         </button>
                                         <button
                                             type="button"
-                                            className="inline-flex justify-center rounded-md border border-transparent bg-primary-300 px-4 py-2 text-sm font-medium text-white hover:bg-primary-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                                            className="inline-flex justify-center rounded-md border border-transparent bg-primary-500 px-4 py-2 text-sm font-medium text-white hover:bg-primary-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                                             onClick={doNothing}
                                         >
                                             Soy menor de edad
