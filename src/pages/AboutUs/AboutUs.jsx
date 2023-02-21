@@ -14,127 +14,135 @@ function AboutUs() {
                 />
             </div>
             <div className="flex flex-col items-center justify-center p-10 pb-0">
-                <h2 className="pb-1 italic self-end">
+                <h2 className="italic">
                     <span className="font-bold not-italic text-primary-500">
                         Ataraxia.
                     </span>{' '}
                     Palabra proveniente del griego ἀ (a = sin) + ταραχή (taraji
                     = alteración); tranquilidad, serenidad, paz de espíritu.
                 </h2>
-                <section className="flex w-3/4 flex-col items-center justify-center pb-5 text-xl indent-5 gap-5 pt-10">
+                <section className="flex w-3/4 flex-col items-center justify-center gap-5 py-10 indent-5 text-xl">
                     <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Rem dolor, commodi quasi tempore accusamus eos, facilis
-                        hic minus libero, odit doloremque. Architecto aperiam
-                        autem ipsum sit nisi dolorum, numquam consequuntur. Rem
-                        dicta blanditiis esse perferendis dolore nisi, eveniet
-                        similique sequi, fugiat suscipit reprehenderit vero.
-                        Odio culpa ex ipsum non, commodi deleniti recusandae,
-                        expedita velit officiis dolor voluptatem at, aliquam
-                        quisquam!
+                        Bienvenido a Ataraxia, una cervecería independiente del
+                        sur de Chile, específicamente de la ciudad de Villarrica
+                        en la Araucanía. Fundada por Matías Mora durante la
+                        pandemia del año 2021, Ataraxia es una cervecería que
+                        busca llevar a sus clientes a un estado de calma o
+                        imperturbabilidad, tal como lo indica su nombre.
                     </p>
                     <p>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing
-                        elit. Impedit ratione incidunt sint commodi eaque
-                        quidem, a voluptatibus nam facilis animi eos deserunt
-                        dolorum iure sed harum eius adipisci minima amet.
+                        Nuestra filosofía es simple: ofrecer productos de alta
+                        calidad y brindar una experiencia excepcional a nuestros
+                        clientes. Nos esforzamos por utilizar ingredientes
+                        locales y de calidad para elaborar nuestras cervezas, y
+                        nos enorgullece apoyar a la economía local.
                     </p>
                     <p>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing
-                        elit. Magnam, quidem. Ipsam libero nobis dolorem soluta
-                        distinctio necessitatibus nostrum sint. Temporibus
-                        voluptatibus officiis ipsam totam facere quae, illum
-                        nostrum! Debitis, officia? Sapiente, nihil totam!
-                        Maiores, velit! Quibusdam, suscipit optio omnis, nemo
-                        iste, fugiat voluptas neque enim odit illo officia vitae
-                        repellat adipisci ut ipsam eum labore itaque ducimus
-                        tempore aut est! Quod recusandae facilis, quisquam
-                        deserunt voluptatibus nam beatae alias illo minima
-                        labore aliquam quam voluptate? Vitae a esse fuga
-                        expedita quasi sit veniam quam praesentium ipsa rem
-                        culpa, libero veritatis.
+                        En Ataraxia, nos esforzamos por ofrecer no solo
+                        excelentes cervezas, sino también una experiencia
+                        completa. Desde el momento en que entra en nuestra
+                        página web, encontrará un ambiente acogedor y relajado.
+                        Nuestro slogan, "Alcanza tu estado de calma", se refleja
+                        en todo lo que hacemos.
+                    </p>
+                    <p>
+                        Nos apasiona lo que hacemos y estamos comprometidos con
+                        brindar productos y servicios excepcionales a nuestros
+                        clientes. Si tiene alguna pregunta o necesita ayuda, no
+                        dude en contactarnos.
+                    </p>
+                    <p>Gracias por elegirnos.</p>
+                    <p>
+                        Atentamente,{' '}
+                        <span className="font-semibold text-primary-500">
+                            El equipo de Ataraxia.
+                        </span>
                     </p>
                 </section>
-                  <h2 className="max-w-md flex-wrap pb-6 text-center text-5xl font-bold text-primary-500">Testimoniales</h2>
-                <div class="mb-8 grid w-3/4 gap-4 rounded-lg md:mb-12 md:grid-cols-2">
-                    <figure class="flex flex-col items-center justify-center rounded-md border-b bg-white p-8 text-center dark:border-black dark:bg-quaternary-300">
-                        <blockquote class="mx-auto mb-4 max-w-2xl  lg:mb-8 ">
-                            <p class="my-4 text-2xl">
+                <h2 className="max-w-md flex-wrap pb-6 text-center text-5xl font-bold text-primary-500">
+                    Testimonios
+                </h2>
+                <div className="mb-8 grid w-3/4 gap-4 rounded-lg md:mb-12 md:grid-cols-2">
+                    <figure className="flex flex-col items-center justify-center rounded-md border-b bg-quaternary-400 p-8 text-center shadow-md duration-200 hover:scale-105 hover:shadow-none">
+                        <blockquote className="mx-auto mb-4 max-w-2xl  lg:mb-8 ">
+                            <p className="my-4 text-2xl text-gray-900">
                                 "La Stout es tan rica y refrescante que les
                                 agoté el stock personalmente."
                             </p>
                         </blockquote>
-                        <figcaption class="flex items-center justify-center space-x-3">
+                        <figcaption className="flex items-center justify-center space-x-3">
                             <img
-                                class="h-9 w-9 rounded-full"
+                                className="h-9 w-9 rounded-full"
                                 src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/karen-nelson.png"
                                 alt="perfil de usuario"
                             />
-                            <div class="space-y-0.5 text-left font-medium dark:text-black">
+                            <div className="space-y-0.5 text-left font-medium text-gray-800">
                                 <div>Lucrecia Gillone</div>
-                                <div class="text-sm">
-                                    Desarrolladora web full-stack
+                                <div className="text-sm">
+                                    Desarrolladora Web Full-Stack
                                 </div>
                             </div>
                         </figcaption>
                     </figure>
-                    <figure class="flex flex-col items-center justify-center rounded-md border-b border-gray-200 bg-white p-8 text-center dark:border-black dark:bg-tertiary-300">
-                        <blockquote class="mx-auto mb-4 max-w-2xl">
-                            <p class="my-4 text-2xl">
+                    <figure className="flex flex-col items-center justify-center rounded-md border-b bg-tertiary-300 p-8 text-center shadow-md duration-200 hover:scale-105 hover:shadow-none">
+                        <blockquote className="mx-auto mb-4 max-w-2xl">
+                            <p className="my-4 text-2xl text-gray-900">
                                 "Esta marca se destaca no sólo por la calidad de
                                 sus productos, sino también por su hermosa
                                 presentación y diseño."
                             </p>
                         </blockquote>
-                        <figcaption class="flex items-center justify-center space-x-3">
+                        <figcaption className="flex items-center justify-center space-x-3">
                             <img
-                                class="h-9 w-9 rounded-full"
+                                className="h-9 w-9 rounded-full"
                                 src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/joseph-mcfall.png"
                                 alt="perfil de usuario"
                             />
-                            <div class="space-y-0.5 text-left font-medium dark:text-black">
+                            <div className="space-y-0.5 text-left font-medium text-gray-800">
                                 <div>Martín Ticinese</div>
-                                <div class="text-sm">CEO de Quilmes</div>
+                                <div className="text-sm">CEO de Quilmes</div>
                             </div>
                         </figcaption>
                     </figure>
-                    <figure class="flex flex-col items-center justify-center rounded-md border-b border-gray-200 bg-white p-8 text-center dark:border-black dark:bg-secondary-100">
-                        <blockquote class="mx-auto mb-4 max-w-2xl">
-                            <p class="my-4 text-2xl">
+                    <figure className="flex flex-col items-center justify-center rounded-md border-b bg-secondary-400 p-8 text-center shadow-md duration-200 hover:scale-105 hover:shadow-none">
+                        <blockquote className="mx-auto mb-4 max-w-2xl">
+                            <p className="my-4 text-2xl text-gray-900">
                                 "A nivel user experience, Ataraxia nos ofrece
                                 una página de e-commerce clara, concisa, y
                                 accesible. Muy recomendable."
                             </p>
                         </blockquote>
-                        <figcaption class="flex items-center justify-center space-x-3">
+                        <figcaption className="flex items-center justify-center space-x-3">
                             <img
-                                class="h-9 w-9 rounded-full"
+                                className="h-9 w-9 rounded-full"
                                 src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
                                 alt="perfil de usuario"
                             />
-                            <div class="space-y-0.5 text-left font-medium dark:text-black">
+                            <div className="space-y-0.5 text-left font-medium text-gray-800">
                                 <div>Lucas Ezequiel Silva</div>
-                                <div class="text-sm">Desarrollador UI/UX</div>
+                                <div className="text-sm">
+                                    Desarrollador UI/UX
+                                </div>
                             </div>
                         </figcaption>
                     </figure>
-                    <figure class="flex flex-col items-center justify-center rounded-md border-gray-200 bg-white p-8 text-center dark:border-black dark:bg-primary-100">
-                        <blockquote class="mx-auto mb-4 max-w-2xl">
-                            <p class="my-4 text-2xl">
+                    <figure className="flex flex-col items-center justify-center rounded-md bg-primary-300 p-8 text-center shadow-md duration-200 hover:scale-105 hover:shadow-none">
+                        <blockquote className="mx-auto mb-4 max-w-2xl">
+                            <p className="my-4 text-2xl text-gray-900">
                                 "Ataraxia? No es esa la enfermedad que te traba
                                 los músculos y no te podés mover?"
                             </p>
                             <br />
                         </blockquote>
-                        <figcaption class="flex items-center justify-center space-x-3">
+                        <figcaption className="flex items-center justify-center space-x-3">
                             <img
-                                class="h-9 w-9 rounded-full"
+                                className="h-9 w-9 rounded-full"
                                 src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/roberta-casas.png"
                                 alt="perfil de usuario"
                             />
-                            <div class="space-y-0.5 text-left font-medium dark:text-black">
+                            <div className="space-y-0.5 text-left font-medium text-gray-800">
                                 <div>Katie Gonzalez</div>
-                                <div class="text-sm">
+                                <div className="text-sm">
                                     Esposa de Ariel Gonzalez
                                 </div>
                             </div>

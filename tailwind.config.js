@@ -3,6 +3,10 @@ module.exports = {
     content: ['./src/**/*.{js,jsx,ts,tsx}'],
     theme: {
         extend: {
+            fontFamily: {
+                poppins: ['Poppins', 'sans-serif'],
+                roboto: ['Roboto', 'sans-serif'],
+            },
             backgroundImage: {
                 'signup-banner': "url('/public/ataraxia-signupbanner.png')",
             },

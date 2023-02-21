@@ -36,7 +36,7 @@ function Layout() {
         <>
             <Nav session={isLogged} />
             <Toaster />
-            <div className="pt-20">
+            <div className="pt-20 font-poppins">
                 <Outlet />
             </div>
             <Footer />
