@@ -1,3 +1,4 @@
+import AboutUs from '../pages/AboutUs/AboutUs'
 import AdminPanel from '../pages/AdminPanel/AdminPanel'
 import AdminTabs from '../components/AdminTabs'
 import BillingDetail from '../components/BillingDetail'
@@ -25,6 +26,10 @@ const indexRouter = createBrowserRouter([
             {
                 path: '/',
                 element: <Home />,
+            },
+            {
+                path: '/aboutUs',
+                element: <AboutUs />,
             },
             {
                 path: '/profile',

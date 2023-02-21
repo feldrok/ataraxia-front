@@ -1,5 +1,6 @@
 import AddToCart from './AddToCart'
 import FastBuy from './FastBuy'
+import Rating from './Ratings'
 import React from 'react'
 import { useParams } from 'react-router'
 function ProductDetail({
@@ -36,6 +37,7 @@ function ProductDetail({
                         >
                             {name}
                         </h1>
+                        <Rating/>
                         <p className="text-gray-600">{description}</p>
                     </div>
                     <div className="flex flex-col gap-2 py-4 text-xl font-bold">

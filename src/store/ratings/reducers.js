@@ -1,19 +1,21 @@
 import { createReducer } from '@reduxjs/toolkit'
 import ratingActions from './actions'
 
-const { createRating, getProductRatings, getUserRating } = ratingActions
+const { createRating, getProductRating, getUserRating } = ratingActions
 
 const initialState = {
     productRating: [],
     userRating: null,
+    message: ""
 }
 
 const ratingReducer = createReducer(initialState, (builder) => {
     builder
-        .addCase(getProductRatings.fulfilled, (state, action) => {
+        .addCase(getProductRating.fulfilled, (state, action) => {
             let newState = {
                 productRating: action.payload.rating,
                 userRating: state.userRating,
+                message: action.payload.message,
             }
             return newState
         })
@@ -21,6 +23,7 @@ const ratingReducer = createReducer(initialState, (builder) => {
             let newState = {
                 productRating: state.productRating,
                 userRating: action.payload.rating,
+                message: action.payload.message,
             }
             return newState
         })
@@ -28,6 +31,7 @@ const ratingReducer = createReducer(initialState, (builder) => {
             let newState = {
                 productRating: state.productRating,
                 userRating: action.payload.rating,
+                message: action.payload.message,
             }
             return newState
         })
