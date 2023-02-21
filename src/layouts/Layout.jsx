@@ -49,7 +49,7 @@ function Layout() {
             <ModalAge modalState={mayorEdad} />
             <Nav session={isLogged} />
             <Toaster />
-            <div className="pt-20 font-poppins">
+            <div className="pt-20 font-sans">
                 <Outlet />
             </div>
             <Footer />
