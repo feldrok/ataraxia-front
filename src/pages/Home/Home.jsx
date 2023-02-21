@@ -29,6 +29,9 @@ function Home() {
         <div className="flex flex-col items-center justify-center">
             <Slider />
             <div className="flex flex-col items-center justify-center p-2">
+                <h1 className="pb-4 text-4xl font-semibold text-primary-500">
+                    Alcanza tu estado de calma...
+                </h1>
                 {storeCategories.categories.response?.map((category) => (
                     <div
                         className="flex flex-col items-center justify-center"
