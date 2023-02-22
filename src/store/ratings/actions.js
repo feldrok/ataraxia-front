@@ -28,7 +28,7 @@ const createRating = createAsyncThunk('rating/createRating', async (data) => {
     } catch (error) {
         return {
             rating: null,
-            message: error.response.data.message,
+            message: error.response.data,
         }
     }
 })
