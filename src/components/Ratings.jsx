@@ -6,6 +6,7 @@ import { useLocation, useParams } from 'react-router'
 
 import { Rating } from '@smastrom/react-rating'
 import ratingActions from '../store/ratings/actions'
+import { toast } from 'react-hot-toast'
 
 const { createRating, getProductRating, getUserRating } = ratingActions
 
@@ -13,6 +14,7 @@ export default function Ratings() {
     const ratingStore = useSelector((store) => store.ratings)
     const dispatch = useDispatch()
     const params = useParams()
+    const [productRating, setProductRating] = useState(0)
     const [rating, setRating] = useState(0)
     const { id } = params
     const location = useLocation()
@@ -20,11 +22,16 @@ export default function Ratings() {
 
     useEffect(() => {
         dispatch(getProductRating(id))
+        dispatch(getUserRating(id))
     }, [location, id])
 
     useEffect(() => {
         if (ratingStore.message === 'Rating encontrado') {
-            setRating(ratingStore.productRating?.response)
+            setProductRating(ratingStore.productRating?.response)
+            setRating(ratingStore.userRating?.response)
+        }
+        if (ratingStore.message === 'Rating creado') {
+            toast.success('Tu clasificación ha sido enviada')
         }
     }, [ratingStore])
 
@@ -36,6 +43,8 @@ export default function Ratings() {
         } catch (error) {
             console.log(error)
         } finally {
+            setRating(selectedValue)
+            await dispatch(getUserRating(id))
             await dispatch(getProductRating(id))
         }
     }
@@ -47,7 +56,7 @@ export default function Ratings() {
                 onChange={handleChange}
                 value={Math.floor(rating)}
             />
-            <p>{`(${rating.toLocaleString({
+            <p>{`(${productRating.toLocaleString({
                 maximumFractionDigits: 1,
             })})`}</p>
         </div>
