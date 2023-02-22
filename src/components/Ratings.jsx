@@ -18,7 +18,6 @@ export default function Ratings() {
     const [rating, setRating] = useState(0)
     const { id } = params
     const location = useLocation()
-    console.log(ratingStore)
 
     useEffect(() => {
         dispatch(getProductRating(id))
@@ -32,6 +31,9 @@ export default function Ratings() {
         }
         if (ratingStore.message === 'Rating creado') {
             toast.success('Tu clasificación ha sido enviada')
+        }
+        if (ratingStore.message === 'Unauthorized') {
+            toast.error('Debes iniciar sesión para calificar')
         }
     }, [ratingStore])
 
