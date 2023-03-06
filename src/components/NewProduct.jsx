@@ -300,7 +300,7 @@ function NewProduct() {
                     <div className="mb-4">
                         <input
                             type="submit"
-                            value="Actualizar"
+                            value="Crear"
                             className="mt-6 w-full cursor-pointer rounded-md bg-primary-500 py-2 px-4 font-bold text-white hover:bg-primary-600"
                         />
                     </div>
