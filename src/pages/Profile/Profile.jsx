@@ -21,7 +21,7 @@ function Profile() {
         if (storeUser.user?.response?.user) {
             dispatch(getProfile(storeUser.user?.response?.user?.id))
         }
-        dispatch(getUserOrders(storeUser.user?.response?.user?.id))
+        dispatch(getUserOrders())
     }, [storeUser.user])
 
     return (
